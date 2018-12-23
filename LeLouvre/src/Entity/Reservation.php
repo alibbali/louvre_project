@@ -43,10 +43,6 @@ class Reservation
      */
     private $code_billet;
 
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="id_reservation")
-     */
-    private $nom;
 
     public function __construct()
     {
@@ -118,34 +114,4 @@ class Reservation
         return $this;
     }
 
-    /**
-     * @return Collection|Billets[]
-     */
-    public function getNom(): Collection
-    {
-        return $this->nom;
-    }
-
-    public function addNom(Billets $nom): self
-    {
-        if (!$this->nom->contains($nom)) {
-            $this->nom[] = $nom;
-            $nom->setIdReservation($this);
-        }
-
-        return $this;
-    }
-
-    public function removeNom(Billets $nom): self
-    {
-        if ($this->nom->contains($nom)) {
-            $this->nom->removeElement($nom);
-            // set the owning side to null (unless already changed)
-            if ($nom->getIdReservation() === $this) {
-                $nom->setIdReservation(null);
-            }
-        }
-
-        return $this;
-    }
 }

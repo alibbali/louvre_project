@@ -17,7 +17,7 @@ class Billets
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="nom")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="id")
      * @ORM\JoinColumn(nullable=false)
      */
     private $id_reservation;
