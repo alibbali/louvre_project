@@ -6,18 +6,30 @@ use App\Entity\Billets;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 
 class BilletsType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('nom')
-            ->add('prenom')
-            ->add('birthday')
-            ->add('reduced')
-            //->add('code_reservation')
-            //->add('id_reservation')
+            ->add('dateVisite', DateType::class)
+            ->add('email', EmailType::class)
+            ->add('type', ChoiceType::class, [
+                'choices' => [
+                    'Journée' => true,
+                    'Demi-Journée' => false
+                ]
+            ])
+            ->add('reservations', CollectionType::class, [
+                'entry_type' => ReservationType::class,
+                'allow_add' => true,
+                'allow_delete' => true
+            ])
         ;
     }
 

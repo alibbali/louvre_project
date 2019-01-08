@@ -1,0 +1,15 @@
+Table Reservation 
+ /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="reservation",cascade={"persist"})
+    * 
+    */
+   private $billets;
+/**
+    * @ORM\ManyToOne(targetEntity="App\Entity\Reservations", inversedBy="billets")
+    * @ORM\JoinColumn(name="reservation_id", referencedColumnName="id")
+    */
+   private $reservation;
+
+
+Faire un JSON pour le paramétrage des dates et des prix
+

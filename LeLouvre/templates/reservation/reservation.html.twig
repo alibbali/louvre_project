@@ -1,0 +1,152 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Acheter un billet -  {{ parent() }} 
+{% endblock title %}
+
+{% block body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h1>Ici sera le formulaire</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mx-auto text-center">
+                <h3>Partie demande Reservation</h3>
+            </div>
+            <hr>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{form_start(billets)}}
+                {{form_row(billets.email)}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{form_row(billets.dateVisite)}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{form_row(billets.type)}}
+            </div>
+        </div>
+
+        
+        
+        
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <div class="form-group">
+                    <div class="input-group mb-3">
+                        <select class="custom-select" id="compteur" required>
+                            <option value="">Nombres de billets souhaités</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                            <option value="7">7</option>
+                            <option value="8">8</option>
+                            <option value="9">9</option>
+                            <option value="10">10</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <button id="ajouter" type="submit" class="btn btn-success">Valider</button>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                    {{form_end(billets)}}
+            </div>
+        </div>
+        
+    </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+    <script type="text/javascript">
+    $(document).ready(function() {
+      // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+      let $container = $('#billets_reservations');
+  
+      // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+      let index = $container.find(':input').length;
+
+      let compteur = $('#compteur');
+  
+      // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+      $('#ajouter').click(function(e) {
+        let nbReservation = compteur.val();
+        for(let i = 0; i < nbReservation ; i ++){
+            addReservation($container);
+        }
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        return false;
+      });
+  
+      // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
+      if (index == 0) {
+        null;
+      } else {
+        // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
+        $container.children('div').each(function() {
+          addDeleteLink($(this));
+        });
+      }
+  
+      // La fonction qui ajoute un formulaire CategoryType
+      function addReservation($container) {
+        // Dans le contenu de l'attribut « data-prototype », on remplace :
+        // - le texte "__name__label__" qu'il contient par le label du champ
+        // - le texte "__name__" qu'il contient par le numéro du champ
+        var template = $container.attr('data-prototype')
+          .replace(/__name__label__/g, 'Réservation n°' + (index+1))
+          .replace(/__name__/g, index)
+        ;
+  
+        // On crée un objet jquery qui contient ce template
+        var $prototype = $(template);
+  
+        // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
+        addDeleteLink($prototype);
+  
+        // On ajoute le prototype modifié à la fin de la balise <div>
+        $container.append($prototype);
+  
+        // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+        index++;
+      }
+  
+      // La fonction qui ajoute un lien de suppression d'une catégorie
+      function addDeleteLink($prototype) {
+        // Création du lien
+        var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
+  
+        // Ajout du lien
+        $prototype.append($deleteLink);
+  
+        // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
+        $deleteLink.click(function(e) {
+          $prototype.remove();
+  
+          e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+          return false;
+        });
+      }
+    });
+  </script> 
+
+{% endblock body %}

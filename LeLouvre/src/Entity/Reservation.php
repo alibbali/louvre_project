@@ -2,9 +2,10 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -20,98 +21,130 @@ class Reservation
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $email;
-
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date_visite;
+    private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $type_billet;
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="date")
+     * @Assert\Date()
+     */
+    private $naissance;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Country
+     */
+    private $pays;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $quantite;
+    private $prix;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $code_billet;
+    private $reduction;
 
-
-    public function __construct()
-    {
-        $this->nom = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Billets", inversedBy="reservations")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $billets;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getNom(): ?string
     {
-        return $this->email;
+        return $this->nom;
     }
 
-    public function setEmail(string $email): self
+    public function setNom(string $nom): self
     {
-        $this->email = $email;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getDateVisite(): ?\DateTimeInterface
+    public function getPrenom(): ?string
     {
-        return $this->date_visite;
+        return $this->prenom;
     }
 
-    public function setDateVisite(\DateTimeInterface $date_visite): self
+    public function setPrenom(string $prenom): self
     {
-        $this->date_visite = $date_visite;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getTypeBillet(): ?string
+    public function getNaissance(): ?\DateTimeInterface
     {
-        return $this->type_billet;
+        return $this->naissance;
     }
 
-    public function setTypeBillet(string $type_billet): self
+    public function setNaissance(\DateTimeInterface $naissance): self
     {
-        $this->type_billet = $type_billet;
+        $this->naissance = $naissance;
 
         return $this;
     }
 
-    public function getQuantite(): ?int
+    public function getPays(): ?string
     {
-        return $this->quantite;
+        return $this->pays;
     }
 
-    public function setQuantite(int $quantite): self
+    public function setPays(string $pays): self
     {
-        $this->quantite = $quantite;
+        $this->pays = $pays;
 
         return $this;
     }
 
-    public function getCodeBillet(): ?string
+    public function getPrix(): ?int
     {
-        return $this->code_billet;
+        return $this->prix;
     }
 
-    public function setCodeBillet(string $code_billet): self
+    public function setPrix(int $prix): self
     {
-        $this->code_billet = $code_billet;
+        $this->prix = $prix;
 
         return $this;
     }
 
+    public function getReduction(): ?bool
+    {
+        return $this->reduction;
+    }
+
+    public function setReduction(bool $reduction): self
+    {
+        $this->reduction = $reduction;
+
+        return $this;
+    }
+
+    public function getBillets(): ?Billets
+    {
+        return $this->billets;
+    }
+
+    public function setBillets(?Billets $billets): self
+    {
+        $this->billets = $billets;
+
+        return $this;
+    }
 }

@@ -2,7 +2,11 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraint;
+Use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BilletsRepository")
@@ -17,109 +21,121 @@ class Billets
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="id")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="datetime")
      */
-    private $id_reservation;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $nom;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $prenom;
+    private $date;
 
     /**
      * @ORM\Column(type="datetime")
+     * @Assert\DateTime
      */
-    private $birthday;
+    private $dateVisite;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="text")
+     * @Assert\Email(
+     *     message="Le mail '{{value}}' est invalide."
+     * )
      */
-    private $reduced;
+    private $email;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="boolean")
      */
-    private $code_reservation;
+    private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets", cascade={"persist"})
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+        $this->dateVisite = new \DateTime();
+        $this->reservations = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getIdReservation(): ?Reservation
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->id_reservation;
+        return $this->date;
     }
 
-    public function setIdReservation(?Reservation $id_reservation): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->id_reservation = $id_reservation;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getNom(): ?string
+    public function getDateVisite(): ?\DateTimeInterface
     {
-        return $this->nom;
+        return $this->dateVisite;
     }
 
-    public function setNom(string $nom): self
+    public function setDateVisite(\DateTimeInterface $dateVisite): self
     {
-        $this->nom = $nom;
+        $this->dateVisite = $dateVisite;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getEmail(): ?string
     {
-        return $this->prenom;
+        return $this->email;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setEmail(string $email): self
     {
-        $this->prenom = $prenom;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getBirthday(): ?\DateTimeInterface
+    public function getType(): ?bool
     {
-        return $this->birthday;
+        return $this->type;
     }
 
-    public function setBirthday(\DateTimeInterface $birthday): self
+    public function setType(bool $type): self
     {
-        $this->birthday = $birthday;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getReduced(): ?bool
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
     {
-        return $this->reduced;
+        return $this->reservations;
     }
 
-    public function setReduced(?bool $reduced): self
+    public function addReservation(Reservation $reservation): self
     {
-        $this->reduced = $reduced;
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setBillets($this);
+        }
 
         return $this;
     }
 
-    public function getCodeReservation(): ?string
+    public function removeReservation(Reservation $reservation): self
     {
-        return $this->code_reservation;
-    }
-
-    public function setCodeReservation(string $code_reservation): self
-    {
-        $this->code_reservation = $code_reservation;
+        if ($this->reservations->contains($reservation)) {
+            $this->reservations->removeElement($reservation);
+            // set the owning side to null (unless already changed)
+            if ($reservation->getBillets() === $this) {
+                $reservation->setBillets(null);
+            }
+        }
 
         return $this;
     }
