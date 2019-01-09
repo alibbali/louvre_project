@@ -11,6 +11,7 @@ use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class BilletsType extends AbstractType
 {
@@ -18,7 +19,6 @@ class BilletsType extends AbstractType
     {
         $builder
             ->add('dateVisite', DateType::class)
-            ->add('email', EmailType::class)
             ->add('type', ChoiceType::class, [
                 'choices' => [
                     'Journée' => true,
@@ -30,6 +30,7 @@ class BilletsType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true
             ])
+            ->add('save', SubmitType::class)
         ;
     }
 

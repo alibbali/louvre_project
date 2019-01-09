@@ -46,10 +46,17 @@ class TicketingController extends AbstractController {
 
         $billets = new Billets();
         $billetsForm = $this->createForm(BilletsType::class, $billets);
-        
-/*         $reservation = new Reservation();
-        $reservationForm = $this->createForm(ReservationType::class, $reservation);
- */       
+
+        $billetsForm->handleRequest($request);
+
+        if($billetsForm->isSubmitted() && $billetsForm->isValid()) {
+            dump($billetsForm);
+            //$this->em->persist($billets);
+            //$this->em->flush();
+
+            //$this->addFlash('message', 'Votre billet a bien été enregistré.');
+            //return $this->redirectToRoute('reservation');
+        }        
 
     return $this->render('reservation/reservation.html.twig', [
             'billets' => $billetsForm->createView()

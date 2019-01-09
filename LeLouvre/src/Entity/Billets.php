@@ -10,6 +10,7 @@ Use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BilletsRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Billets
 {
@@ -48,6 +49,11 @@ class Billets
      * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets", cascade={"persist"})
      */
     private $reservations;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $serialNumber;
 
     public function __construct()
     {
@@ -138,5 +144,24 @@ class Billets
         }
 
         return $this;
+    }
+
+    public function getSerialNumber(): ?string
+    {
+        return $this->serialNumber;
+    }
+
+    public function setSerialNumber(string $serialNumber): self
+    {
+        $this->serialNumber = $serialNumber;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function createSerialNumber() {
+        //Il faut trouver un moyen de créer un serial number 
     }
 }

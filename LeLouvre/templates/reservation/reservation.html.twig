@@ -7,6 +7,13 @@
 {% block body %}
     <div class="container mt-4">
         <div class="row">
+            {% for message in app.flashes('message') %}
+                <div class="col-md-12 mx-auto alert alert-success">
+                    {{message}}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="row">
             <div class="col-md-6 mx-auto">
                 <h1>Ici sera le formulaire</h1>
             </div>
@@ -22,7 +29,6 @@
         <div class="row">
             <div class="col-md-6 mx-auto">
                 {{form_start(billets)}}
-                {{form_row(billets.email)}}
             </div>
         </div>
 
@@ -65,7 +71,7 @@
         
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <button id="ajouter" type="submit" class="btn btn-success">Valider</button>
+                <button id="ajouter" type="submit" class="btn btn-success">Remplir les reservations</button>
             </div>
         </div>
         
