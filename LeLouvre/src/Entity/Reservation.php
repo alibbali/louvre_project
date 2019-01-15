@@ -2,13 +2,16 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraint;
-use Symfony\Component\Validator\Constraints as Assert;
-
+use App\Validator\CheckBillets;
+Use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Reservation
 {
@@ -20,130 +23,148 @@ class Reservation
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="datetime")
      */
-    private $nom;
+    private $date;
 
     /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\NotBlank()
+     * @ORM\Column(type="datetime")
+     * @Assert\DateTime()
+     * @Assert\GreaterThanOrEqual("today UTC")
      */
-    private $prenom;
+    private $dateVisite;
 
     /**
-     * @ORM\Column(type="date")
-     * @Assert\Date()
+     * @ORM\Column(type="text")
+     * @Assert\Email(
+     *     message="Le mail '{{value}}' est invalide."
+     * )
      */
-    private $naissance;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     * @Assert\Country
-     */
-    private $pays;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $prix;
+    private $email;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $reduction;
+    private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Billets", inversedBy="reservations")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Billets", inversedBy="reservations", cascade={"persist"})
+     * @Assert\Valid()
      */
     private $billets;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $serialNumber;
+
+    public function __construct()
+    {
+        $this->date = new \DateTime();
+        $this->dateVisite = new \DateTime();
+        $this->billets = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getNom(): ?string
+    public function getDate(): ?\DateTimeInterface
     {
-        return $this->nom;
+        return $this->date;
     }
 
-    public function setNom(string $nom): self
+    public function setDate(\DateTimeInterface $date): self
     {
-        $this->nom = $nom;
+        $this->date = $date;
 
         return $this;
     }
 
-    public function getPrenom(): ?string
+    public function getDateVisite(): ?\DateTimeInterface
     {
-        return $this->prenom;
+        return $this->dateVisite;
     }
 
-    public function setPrenom(string $prenom): self
+    public function setDateVisite(\DateTimeInterface $dateVisite): self
     {
-        $this->prenom = $prenom;
+        $this->dateVisite = $dateVisite;
 
         return $this;
     }
 
-    public function getNaissance(): ?\DateTimeInterface
+    public function getEmail(): ?string
     {
-        return $this->naissance;
+        return $this->email;
     }
 
-    public function setNaissance(\DateTimeInterface $naissance): self
+    public function setEmail(string $email): self
     {
-        $this->naissance = $naissance;
+        $this->email = $email;
 
         return $this;
     }
 
-    public function getPays(): ?string
+    public function getType(): ?bool
     {
-        return $this->pays;
+        return $this->type;
     }
 
-    public function setPays(string $pays): self
+    public function setType(bool $type): self
     {
-        $this->pays = $pays;
+        $this->type = $type;
 
         return $this;
     }
 
-    public function getPrix(): ?int
-    {
-        return $this->prix;
-    }
-
-    public function setPrix(int $prix): self
-    {
-        $this->prix = $prix;
-
-        return $this;
-    }
-
-    public function getReduction(): ?bool
-    {
-        return $this->reduction;
-    }
-
-    public function setReduction(bool $reduction): self
-    {
-        $this->reduction = $reduction;
-
-        return $this;
-    }
-
-    public function getBillets(): ?Billets
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getBillets(): Collection
     {
         return $this->billets;
     }
 
-    public function setBillets(?Billets $billets): self
+
+    public function getSerialNumber(): ?string
     {
-        $this->billets = $billets;
+        return $this->serialNumber;
+    }
+
+    public function setSerialNumber(string $serialNumber): self
+    {
+        $this->serialNumber = $serialNumber;
+
+        return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function createSerialNumber() {
+        //Il faut trouver un moyen de créer un serial number 
+    }
+
+    public function addBillet(Billets $billet): self
+    {
+        if (!$this->billets->contains($billet)) {
+            $this->billets[] = $billet;
+            $billet->setReservations($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBillet(Billets $billet): self
+    {
+        if ($this->billets->contains($billet)) {
+            $this->billets->removeElement($billet);
+            // set the owning side to null (unless already changed)
+            if ($billet->getReservations() === $this) {
+                $billet->setReservations(null);
+            }
+        }
 
         return $this;
     }

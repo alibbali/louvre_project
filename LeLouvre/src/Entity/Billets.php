@@ -2,15 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraint;
-Use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\BilletsRepository")
- * @ORM\HasLifecycleCallbacks()
  */
 class Billets
 {
@@ -22,146 +20,143 @@ class Billets
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $date;
+    private $nom;
 
     /**
-     * @ORM\Column(type="datetime")
-     * @Assert\DateTime
+     * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank()
      */
-    private $dateVisite;
+    private $prenom;
 
     /**
-     * @ORM\Column(type="text")
-     * @Assert\Email(
-     *     message="Le mail '{{value}}' est invalide."
-     * )
+     * @ORM\Column(type="date")
+     * @Assert\Date()
      */
-    private $email;
+    private $naissance;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Country
+     */
+    private $pays;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $prix;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $type;
+    private $reduction;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $reservations;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $serialNumber;
-
-    public function __construct()
-    {
-        $this->date = new \DateTime();
-        $this->dateVisite = new \DateTime();
-        $this->reservations = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getNom(): ?string
     {
-        return $this->date;
+        return $this->nom;
     }
 
-    public function setDate(\DateTimeInterface $date): self
+    public function setNom(string $nom): self
     {
-        $this->date = $date;
+        $this->nom = $nom;
 
         return $this;
     }
 
-    public function getDateVisite(): ?\DateTimeInterface
+    public function getPrenom(): ?string
     {
-        return $this->dateVisite;
+        return $this->prenom;
     }
 
-    public function setDateVisite(\DateTimeInterface $dateVisite): self
+    public function setPrenom(string $prenom): self
     {
-        $this->dateVisite = $dateVisite;
+        $this->prenom = $prenom;
 
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getNaissance(): ?\DateTimeInterface
     {
-        return $this->email;
+        return $this->naissance;
     }
 
-    public function setEmail(string $email): self
+    public function setNaissance(\DateTimeInterface $naissance): self
     {
-        $this->email = $email;
+        $this->naissance = $naissance;
 
         return $this;
     }
 
-    public function getType(): ?bool
+    public function getPays(): ?string
     {
-        return $this->type;
+        return $this->pays;
     }
 
-    public function setType(bool $type): self
+    public function setPays(string $pays): self
     {
-        $this->type = $type;
+        $this->pays = $pays;
 
         return $this;
     }
 
-    /**
-     * @return Collection|Reservation[]
-     */
-    public function getReservations(): Collection
+    public function getPrix(): ?int
+    {
+        return $this->prix;
+    }
+
+    public function setPrix(int $prix): self
+    {
+        $this->prix = $prix;
+
+        return $this;
+    }
+
+    public function getReduction(): ?bool
+    {
+        return $this->reduction;
+    }
+
+    public function setReduction(bool $reduction): self
+    {
+        $this->reduction = $reduction;
+
+        return $this;
+    }
+/* 
+    public function getBillets(): ?Billets
+    {
+        return $this->billets;
+    }
+
+    public function setBillets(?Billets $billets): self
+    {
+        $this->billets = $billets;
+
+        return $this;
+    }
+ */
+    public function getReservations(): ?Reservation
     {
         return $this->reservations;
     }
 
-    public function addReservation(Reservation $reservation): self
+    public function setReservations(?Reservation $reservations): self
     {
-        if (!$this->reservations->contains($reservation)) {
-            $this->reservations[] = $reservation;
-            $reservation->setBillets($this);
-        }
+        $this->reservations = $reservations;
 
         return $this;
-    }
-
-    public function removeReservation(Reservation $reservation): self
-    {
-        if ($this->reservations->contains($reservation)) {
-            $this->reservations->removeElement($reservation);
-            // set the owning side to null (unless already changed)
-            if ($reservation->getBillets() === $this) {
-                $reservation->setBillets(null);
-            }
-        }
-
-        return $this;
-    }
-
-    public function getSerialNumber(): ?string
-    {
-        return $this->serialNumber;
-    }
-
-    public function setSerialNumber(string $serialNumber): self
-    {
-        $this->serialNumber = $serialNumber;
-
-        return $this;
-    }
-
-    /**
-     * @ORM\PrePersist
-     */
-    public function createSerialNumber() {
-        //Il faut trouver un moyen de créer un serial number 
     }
 }

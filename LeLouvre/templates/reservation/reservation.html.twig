@@ -15,32 +15,33 @@
         </div>
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <h1>Ici sera le formulaire</h1>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mx-auto text-center">
-                <h3>Partie demande Reservation</h3>
-            </div>
-            <hr>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                {{form_start(billets)}}
+                <h1 class="text-center">Ici sera le formulaire</h1>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 mx-auto">
-                {{form_row(billets.dateVisite)}}
+                <h3 class="text-center">Partie demande Reservation</h3>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{form_start(form)}}
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 mx-auto">
-                {{form_row(billets.type)}}
+                {{form_row(form.dateVisite)}}
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                {{form_row(form.type)}}
             </div>
         </div>
 
@@ -71,23 +72,24 @@
         
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <button id="ajouter" type="submit" class="btn btn-success">Remplir les reservations</button>
+                <button id="ajouter" type="submit" class="btn btn-secondary">Remplir les reservations</button>
+                {{form_row(form.billets)}}
             </div>
         </div>
         
         <div class="row">
             <div class="col-md-6 mx-auto">
-                    {{form_end(billets)}}
+                    {{form_end(form)}}
             </div>
         </div>
         
     </div>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
     <script type="text/javascript">
-    $(document).ready(function() {
-      // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-      let $container = $('#billets_reservations');
-  
+        $(document).ready(function() {
+            // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+        let $container = $('#reservation_billets');
+                
       // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
       let index = $container.find(':input').length;
 
@@ -95,8 +97,8 @@
   
       // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
       $('#ajouter').click(function(e) {
-        let nbReservation = compteur.val();
-        for(let i = 0; i < nbReservation ; i ++){
+        let nbBillets = compteur.val();
+        for(let i = 0; i < nbBillets ; i ++){
             addReservation($container);
         }
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
@@ -119,7 +121,7 @@
         // - le texte "__name__label__" qu'il contient par le label du champ
         // - le texte "__name__" qu'il contient par le numéro du champ
         var template = $container.attr('data-prototype')
-          .replace(/__name__label__/g, 'Réservation n°' + (index+1))
+          .replace(/__name__label__/g, 'Billet n°' + (index+1))
           .replace(/__name__/g, index)
         ;
   
