@@ -4,7 +4,7 @@
     Acheter un billet -  {{ parent() }} 
 {% endblock title %}
 
-{% block body %}
+{% block musee_body %}
     <div class="container mt-4">
         <div class="row">
             {% for message in app.flashes('success') %}
@@ -15,49 +15,31 @@
         </div>
         <div class="row">
             <div class="col-md-6 mx-auto">
-                <h1 class="text-center">Ici sera le formulaire</h1>
+                <h1 class="text-center">Billeterie</h1>
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <h3 class="text-center">Partie demande Reservation</h3>
-            </div>
-        </div>
 
         <hr>
 
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                {{form_start(form)}}
-            </div>
-        </div>
+        {{form_start(form)}}
 
         <div class="row">
-            <div class="col-md-6 mx-auto">
+            <div class="col-md-12 mx-auto">
                 {{form_errors(form)}}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6 mx-auto">
+            <div class="col-md-4 mx-auto">
                 {{form_row(form.dateVisite)}}
             </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-6 mx-auto">
+            <div class="col-md-4 mx-auto">
                 {{form_row(form.type)}}
             </div>
-        </div>
-
-        
-        
-        
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="form-group">
-                    <div class="input-group mb-3">
+            <div class="col-md-4 mx-auto">
+                <label for="quantite">Nombre de réservations</label>
+                    <div class="input-group">
                         <select class="custom-select" id="compteur" required>
                             <option value="">Nombres de billets souhaités</option>
                             <option value="1">1</option>
@@ -71,26 +53,32 @@
                             <option value="9">9</option>
                             <option value="10">10</option>
                         </select>
-                    </div>
                 </div>
             </div>
         </div>
         
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <button id="ajouter" type="submit" class="btn btn-secondary">Remplir les reservations</button>
-                {{form_row(form.billets)}}
+        <div class="row mt-4">
+            <div class="col-md-12 mx-auto">
+                <p class="text-center"><button id="ajouter" type="submit" class="btn btn-secondary">Remplir les reservations</button></p>
             </div>
         </div>
         
+        <hr>
+        
+        <div class="row">
+            <div class="col-md-12">
+                {{form_row(form.billets)}}
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6 mx-auto">
                     {{form_end(form)}}
             </div>
         </div>
-        
+       
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script> 
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script type="text/javascript">
         $(document).ready(function() {
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
@@ -163,4 +151,4 @@
     });
   </script> 
 
-{% endblock body %}
+{% endblock musee_body %}

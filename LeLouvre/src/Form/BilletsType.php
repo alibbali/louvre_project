@@ -23,11 +23,13 @@ class BilletsType extends AbstractType
         ->add('nom', TextType::class)
         ->add('prenom', TextType::class)
         ->add('naissance', BirthdayType::class, [
+            'label' => 'Votre date de naissance',
             'placeholder' => [
                 'day' => 'Jour',
                 'month' => 'Mois',
                 'year' => 'Année',
-            ]
+            ],
+            'format' => 'dd-MM-yyyy'
         ])
         ->add('pays', CountryType::class)
         ->add('reduction')

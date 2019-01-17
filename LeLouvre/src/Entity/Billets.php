@@ -22,12 +22,21 @@ class Billets
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     * @Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      maxMessage = "Votre nom n'est il pas trop long ?")
      */
     private $nom;
 
     /**
      * @ORM\Column(type="string", length=255)
      * @Assert\NotBlank()
+     *@Assert\Length(
+     *      min = 3,
+     *      max = 50,
+     *      minMessage = "Votre nom est trop court.",
+     *      maxMessage = "Votre nom n'est il pas trop long ?")
      */
     private $prenom;
 
@@ -54,7 +63,7 @@ class Billets
     private $reduction;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets")
+     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $reservations;

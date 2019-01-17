@@ -1,0 +1,76 @@
+{% extends "base.html.twig" %}
+
+{% block musee_body %}
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="jumbotron">
+                <h1 class="text-center">Toutes les infos pratiques sur le musée du louvre</h1>
+                <h4 class="text-center">Nous avons récemment mis à jour notre systeme de billeterie avec un systéme de réservation en ligne.</br>
+                Voici les tarifs proposé par le musée. Bonne visite !</h4>
+            </div>
+        </div>
+    </div>
+
+        <div class="card-deck mb-3 text-center mt-4">
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Normal</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><small class="text-muted">16 €</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>Tarifs à partir de 16 ans</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Enfant</h4>
+                </div>
+                <div class="card-body">
+                    <h1 class="card-title pricing-card-title"><small class="text-muted">8 €</small></h1>
+                    <ul class="list-unstyled mt-3 mb-4">
+                        <li>A partir de 4 ans</li>
+                        <li>Jusqu'a 12 ans</li>
+                        <li>L'entrée est gratuite pour les</li>
+                        <li>enfants de moins de 4 ans</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+                <div class="card-header">
+                    <h4 class="my-0 font-weight-normal">Sénior</h4>
+          </div>
+          <div class="card-body">
+              <h1 class="card-title pricing-card-title"><small class="text-muted">12 €</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                  <li>Pour les plus de 60 ans</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-md-12 text-center">
+                <p><a class="btn btn-primary" href="{{path('reservation')}}">Réserver un ou plusieurs billets</a></p>
+            </div>
+    </div>
+    
+    <div class="row mt-4">
+        <div class="col-md-12 text-center">
+            <h1 class="">Les Horaires</h1>
+        </div>
+
+        <div class="col-md-5 mx-auto text-center">
+            <ul class="list-group">
+                <li class="list-group-item">Du Lundi au Dimanche sauf le mardi et jours férié</li>
+                <li class="list-group-item">Ouverture de 9h à 19h</li>
+            </ul>
+        </div>
+    </div>
+    
+    
+</div>
+{% endblock musee_body %}
