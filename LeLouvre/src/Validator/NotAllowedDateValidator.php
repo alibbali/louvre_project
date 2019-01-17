@@ -29,7 +29,7 @@ class NotAllowedDateValidator extends ConstraintValidator
         $daysOfFormattedDate = date('N', strtotime($date));
         $formatedTime = date('H:i', strtotime($date));
         //ici sera la liste complête des jours fériés que je dois mettre au format anglais sinon cela ne fonctionne pas....
-        $notAllowedDate = ["01/01", "12/25"];
+        $notAllowedDate = ["05/01", "12/25", "11/01"];
 
             foreach ($notAllowedDate as $key) {
                 $formatedList = date('d/m', strtotime($key));
@@ -39,7 +39,6 @@ class NotAllowedDateValidator extends ConstraintValidator
                     $message = $this->context->buildViolation("Le musée est fermé les jours fériés.")
                                   ->atPath('dateVisite')
                                   ->addViolation();
-                    //$message = "On ne peut pas commander les jous fériés.";
                     return $message;
                 }
                 //Si il est 14 h passé mais celui ci est à mettre dans un autre validateur
@@ -47,15 +46,13 @@ class NotAllowedDateValidator extends ConstraintValidator
                     $message = $this->context->buildViolation("Il est 14h passé, vous ne pouvez plus commander")
                                   ->atPath('dateVisite')
                                   ->addViolation();
-                    //$message = "Il est 14h passé, désolé.";
                     return $message;
                 }
-                //Si c'est un dimanche
-                elseif($daysOfFormattedDate == 7 ){
-                   $message = $this->context->buildViolation("Le musée est fermé le dimanche, impossible de commander.")
+                //Si c'est un mardi
+                elseif($daysOfFormattedDate == 2 ){
+                   $message = $this->context->buildViolation("Le musée est fermé le mardi, impossible de commander.")
                                   ->atPath('dateVisite')
                                   ->addViolation();
-                    //$message = "On ne peut pas commander les dimanches freulo.";
                     return $message;
                 }
             }
