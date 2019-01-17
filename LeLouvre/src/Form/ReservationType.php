@@ -22,7 +22,6 @@ class ReservationType extends AbstractType
         $builder
         ->add('dateVisite', DateType::class, [
             'format' => 'dd-MM-yyyy',
-            'attr' => ['class' => 'js-datepicker'],
         ])
         ->add('type', ChoiceType::class, [
             'choices' => [

@@ -52,13 +52,13 @@ class TicketingController extends AbstractController {
         if($form->isSubmitted() && $form->isValid()) {
             //$this->em->persist($billets);
             //$this->em->flush();
-            echo '<pre>';
+          /*   echo '<pre>';
             var_dump($reservation);
             die;
-            echo '</pre>';
+            echo '</pre>'; */
 
-            //$this->addFlash('message', 'Votre billet a bien été enregistré.');
-            //return $this->redirectToRoute('reservation');
+            $this->addFlash('success', 'Votre billet a bien été enregistré.');
+            return $this->redirectToRoute('reservation');
         }
     
     return $this->render('reservation/reservation.html.twig', [

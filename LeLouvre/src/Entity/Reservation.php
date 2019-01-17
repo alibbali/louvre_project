@@ -7,7 +7,8 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraint;
 use App\Validator\CheckBillets;
-Use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Constraints as Assert;
+use App\Validator\NotAllowedDate;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -30,7 +31,8 @@ class Reservation
     /**
      * @ORM\Column(type="datetime")
      * @Assert\DateTime()
-     * @Assert\GreaterThanOrEqual("today UTC")
+     * @Assert\GreaterThanOrEqual("today UTC", message="Impossible de réserver à une date antérieure à celle d'aujourd'hui.")
+     * @NotAllowedDate()
      */
     private $dateVisite;
 

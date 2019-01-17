@@ -40,6 +40,7 @@ class ReservationRepository extends ServiceEntityRepository
             }
             return $total;
         }
+         
 
     // /**
     //  * @return Reservation[] Returns an array of Reservation objects
