@@ -50,7 +50,7 @@ class TicketingController extends AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            //$this->em->persist($billets);
+            $this->em->persist($reservation);
             //$this->em->flush();
             echo '<pre>';
             var_dump($reservation);

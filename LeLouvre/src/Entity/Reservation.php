@@ -50,7 +50,7 @@ class Reservation
     private $type;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Billets", inversedBy="reservations", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="reservations", cascade={"persist"})
      * @Assert\Valid()
      */
     private $billets;
@@ -128,13 +128,12 @@ class Reservation
         return $this->billets;
     }
 
-
     public function getSerialNumber(): ?string
     {
         return $this->serialNumber;
     }
 
-    public function setSerialNumber(string $serialNumber): self
+    public function setSerialNumber($serialNumber): self
     {
         $this->serialNumber = $serialNumber;
 
@@ -145,7 +144,9 @@ class Reservation
      * @ORM\PrePersist
      */
     public function createSerialNumber() {
-        //Il faut trouver un moyen de créer un serial number 
+
+        $this->setSerialNumber(uniqid('MDL'));
+
     }
 
     public function addBillet(Billets $billet): self

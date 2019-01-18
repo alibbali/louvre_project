@@ -63,7 +63,7 @@ class Billets
     private $reduction;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Reservation", mappedBy="billets", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="billets", cascade={"persist"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $reservations;
