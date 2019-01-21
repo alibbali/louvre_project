@@ -21,29 +21,41 @@ class NotAllowedDateValidator extends ConstraintValidator
 
     public function validate($value, Constraint $constraint)
     {
+       
+
         //Je transforme l'objet en array pour récuperer uniquement la date
         $value = get_object_vars($value);
         $date = $value['date'];
+
         //Je formate de façon à récuperer les éléments voulus
-        $formatedDate = date('d/m', strtotime($date));
+        $formatedDate = date('m/d', strtotime($date));
         $daysOfFormattedDate = date('N', strtotime($date));
         $formatedTime = date('H:i', strtotime($date));
+
         //ici sera la liste complête des jours fériés que je dois mettre au format anglais sinon cela ne fonctionne pas....
         $notAllowedDate = ["05/01", "12/25", "11/01"];
-
-            foreach ($notAllowedDate as $key) {
+        
+        //Je scinde pour éviter de boucler et pour améliorer la performance
+        //D'abord si formatedDate est égal à une des valeur du tableau NotAllowedDate
+        if (in_array($formatedDate, $notAllowedDate)) {
+            $message = $this->context->buildViolation("Le musée est fermé les jours fériés.")
+                                  ->atPath('dateVisite')
+                                  ->addViolation();
+                    return $message;
+        }
+        //Si c'est un mardi
+        elseif($daysOfFormattedDate == 2 ){
+            $message = $this->context->buildViolation("Le musée est fermé le mardi, impossible de commander.")
+                           ->atPath('dateVisite')
+                           ->addViolation();
+             return $message;
+         }
+        /*     foreach ($notAllowedDate as $key) {
                 $formatedList = date('d/m', strtotime($key));
                 //Si la date choisi est un jour férié :
                 if($formatedDate == $formatedList) {
                    
                     $message = $this->context->buildViolation("Le musée est fermé les jours fériés.")
-                                  ->atPath('dateVisite')
-                                  ->addViolation();
-                    return $message;
-                }
-                //Si il est 14 h passé mais celui ci est à mettre dans un autre validateur
-                elseif($formatedTime > "14:00") {
-                    $message = $this->context->buildViolation("Il est 14h passé, vous ne pouvez plus commander")
                                   ->atPath('dateVisite')
                                   ->addViolation();
                     return $message;
@@ -55,6 +67,6 @@ class NotAllowedDateValidator extends ConstraintValidator
                                   ->addViolation();
                     return $message;
                 }
-            }
+            } */
     }
 }

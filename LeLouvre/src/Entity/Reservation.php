@@ -9,6 +9,7 @@ use Symfony\Component\Validator\Constraint;
 use App\Validator\CheckBillets;
 use Symfony\Component\Validator\Constraints as Assert;
 use App\Validator\NotAllowedDate;
+use App\Validator\AfterHour;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ReservationRepository")
@@ -46,6 +47,7 @@ class Reservation
 
     /**
      * @ORM\Column(type="boolean")
+     * @AfterHour()
      */
     private $type;
 

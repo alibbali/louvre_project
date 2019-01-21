@@ -13,6 +13,8 @@ use App\Form\ReservationType;
 use App\Entity\Billets;
 use App\Entity\Reservation;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+
 
 
 class TicketingController extends AbstractController {
@@ -42,7 +44,7 @@ class TicketingController extends AbstractController {
     /**
      * @Route("/reservation", name="reservation")
      */
-    public function new(Request $request) {
+    public function new(Request $request, Session $session) {
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -50,13 +52,15 @@ class TicketingController extends AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $this->em->persist($reservation);
+            //$session->set('Reservation', $reservation);
+            //$this->em->persist($reservation);
             //$this->em->flush();
             echo '<pre>';
             var_dump($reservation);
             die;
             echo '</pre>';
-            $this->addFlash('success', 'Votre billet a bien été enregistré.');
+            //$this->addFlash('success', 'Votre billet a bien été enregistré.');
+            //Redirection vers la fin du paiement avec email + Stripe
             return $this->redirectToRoute('reservation');
         }
     
