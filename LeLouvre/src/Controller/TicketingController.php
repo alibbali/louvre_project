@@ -14,6 +14,7 @@ use App\Entity\Billets;
 use App\Entity\Reservation;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
+use App\Services\GivePrice;
 
 
 
@@ -44,7 +45,7 @@ class TicketingController extends AbstractController {
     /**
      * @Route("/reservation", name="reservation")
      */
-    public function new(Request $request, Session $session) {
+    public function new(Request $request,Session $session,GivePrice $givePrice) {
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -52,11 +53,13 @@ class TicketingController extends AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
+            $testService = $givePrice->givePrice($reservation);
+            //$session = $session->start();
             //$session->set('Reservation', $reservation);
             //$this->em->persist($reservation);
             //$this->em->flush();
             echo '<pre>';
-            var_dump($reservation);
+            var_dump($reservation, $testService);
             die;
             echo '</pre>';
             //$this->addFlash('success', 'Votre billet a bien été enregistré.');
@@ -67,5 +70,6 @@ class TicketingController extends AbstractController {
     return $this->render('reservation/reservation.html.twig', [
             'form' => $form->createView()
         ]);
-  }
+    }
+
 }

@@ -1,11 +1,2 @@
-Table Reservation 
- /**
-    * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="reservation",cascade={"persist"})
-    * 
-    */
-   private $billets;
-/**
-    * @ORM\ManyToOne(targetEntity="App\Entity\Reservations", inversedBy="billets")
-    * @ORM\JoinColumn(name="reservation_id", referencedColumnName="id")
-    */
-   private $reservation;
+Quand je récupére l'heure actuelle, il est une h de moi que l'heure actuelle, faire le formatage 
+a l'heure de Paris.
