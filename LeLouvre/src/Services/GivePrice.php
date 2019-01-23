@@ -28,5 +28,16 @@ class GivePrice {
                     $billet->setPrix(0);
                 }
             }
+        } 
+
+    public function totalPrice(Reservation $reservation) {
+
+        
+        $total = 0;
+        foreach($reservation->getBillets() as $billet) {
+            $total += $billet->getPrix();
         }
+
+        return $total;
+    }
 }

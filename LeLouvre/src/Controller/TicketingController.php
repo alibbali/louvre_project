@@ -54,6 +54,7 @@ class TicketingController extends AbstractController {
 
         if($form->isSubmitted() && $form->isValid()) {
             $testService = $givePrice->givePrice($reservation);
+            $testService = $givePrice->totalPrice($reservation);
             //$session = $session->start();
             //$session->set('Reservation', $reservation);
             //$this->em->persist($reservation);
@@ -71,5 +72,4 @@ class TicketingController extends AbstractController {
             'form' => $form->createView()
         ]);
     }
-
 }
