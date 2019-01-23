@@ -15,6 +15,7 @@ use App\Entity\Reservation;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Services\GivePrice;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
 
@@ -45,7 +46,7 @@ class TicketingController extends AbstractController {
     /**
      * @Route("/reservation", name="reservation")
      */
-    public function new(Request $request,Session $session,GivePrice $givePrice) {
+    public function new(Request $request,SessionInterface $session,GivePrice $givePrice) {
 
         $reservation = new Reservation();
         $form = $this->createForm(ReservationType::class, $reservation);
@@ -53,23 +54,27 @@ class TicketingController extends AbstractController {
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()) {
-            $testService = $givePrice->givePrice($reservation);
-            $testService = $givePrice->totalPrice($reservation);
-            //$session = $session->start();
-            //$session->set('Reservation', $reservation);
-            //$this->em->persist($reservation);
-            //$this->em->flush();
-            echo '<pre>';
-            var_dump($reservation, $testService);
-            die;
-            echo '</pre>';
-            //$this->addFlash('success', 'Votre billet a bien été enregistré.');
+            $session->set('Reservation', $reservation);
+
             //Redirection vers la fin du paiement avec email + Stripe
-            return $this->redirectToRoute('reservation');
+            return $this->redirectToRoute('summary');
         }
     
     return $this->render('reservation/reservation.html.twig', [
             'form' => $form->createView()
+        ]);
+    }
+
+    /**
+     * @Route("/summary", name="summary")
+     */
+    public function summary(SessionInterface $session, GivePrice $givePrice) {
+        $reservation = $session->get('Reservation');
+
+        $testService = $givePrice->totalPrice($reservation);
+
+        return $this->render('reservation/summary.html.twig', [
+            'reservation' => $reservation
         ]);
     }
 }

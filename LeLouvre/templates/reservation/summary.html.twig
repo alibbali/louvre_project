@@ -1,0 +1,48 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+    Récapitulatif - {{ parent() }}    
+{% endblock title %}
+
+{% block musee_body %}
+    <div class="container mt-4">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Récapitulatif de votre commande</h1>
+            </div>
+        </div>
+        
+        <hr>
+
+        <div class="row mt-4">
+            <div class="col-md-4 text-center">
+                <h4>Billet commandé le :</h4>
+                <p>{{reservation.date|date("d/m/Y")}}</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h4>Pour une visite prévue le :</h4>
+                <p>{{reservation.dateVisite|date("d/m/Y")}}</p>
+            </div>
+            <div class="col-md-4 text-center">
+                <h4>Nombre de réservation faite</h4>
+                <p>{{reservation.getBillets}}</p>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h1>Vos billets</h1>
+            </div>
+        </div>
+
+        
+    
+
+
+
+
+    </div>
+    
+{% endblock musee_body %}
