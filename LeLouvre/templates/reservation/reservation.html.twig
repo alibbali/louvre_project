@@ -59,7 +59,7 @@
         
         <div class="row mt-4">
             <div class="col-md-12 mx-auto">
-                <p class="text-center"><button id="ajouter" type="submit" class="btn btn-secondary">Remplir les reservations</button></p>
+                <p class="text-center btn btn-secondary" id="ajouter">Remplir les reservations</p>
             </div>
         </div>
         
@@ -71,6 +71,13 @@
             </div>
         </div>
 
+        
+        <div class="row" id="recap">
+            <div class="col-md-12 text-right">
+                {{form_row(form.save)}}
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-6 mx-auto">
                     {{form_end(form)}}
@@ -78,7 +85,10 @@
         </div>
        
     </div>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    
+    {% endblock musee_body %}
+    {% block javascripts %}
+    {{ parent() }}
     <script type="text/javascript">
         $(document).ready(function() {
             // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
@@ -88,67 +98,36 @@
       let index = $container.find(':input').length;
 
       let compteur = $('#compteur');
-  
+      let recap = $('#recap');
+      recap.hide();
       // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
       $('#ajouter').click(function(e) {
+          if(compteur.val() <= 0) {
+              $('#ajouter').show();
+          }
+          else {
+              $('#recap').show();
+              $('#ajouter').hide();
+          }
         let nbBillets = compteur.val();
         for(let i = 0; i < nbBillets ; i ++){
             addReservation($container);
         }
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+
         return false;
       });
-  
-      // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
-      if (index == 0) {
-        null;
-      } else {
-        // S'il existe déjà des catégories, on ajoute un lien de suppression pour chacune d'entre elles
-        $container.children('div').each(function() {
-          addDeleteLink($(this));
-        });
-      }
-  
-      // La fonction qui ajoute un formulaire CategoryType
+    
       function addReservation($container) {
-        // Dans le contenu de l'attribut « data-prototype », on remplace :
-        // - le texte "__name__label__" qu'il contient par le label du champ
-        // - le texte "__name__" qu'il contient par le numéro du champ
         var template = $container.attr('data-prototype')
           .replace(/__name__label__/g, 'Billet n°' + (index+1))
           .replace(/__name__/g, index)
         ;
   
-        // On crée un objet jquery qui contient ce template
         var $prototype = $(template);
-  
-        // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-        addDeleteLink($prototype);
-  
-        // On ajoute le prototype modifié à la fin de la balise <div>
         $container.append($prototype);
-  
-        // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
         index++;
       }
-  
-      // La fonction qui ajoute un lien de suppression d'une catégorie
-      function addDeleteLink($prototype) {
-        // Création du lien
-        var $deleteLink = $('<a href="#" class="btn btn-danger">Supprimer</a>');
-  
-        // Ajout du lien
-        $prototype.append($deleteLink);
-  
-        // Ajout du listener sur le clic du lien pour effectivement supprimer la catégorie
-        $deleteLink.click(function(e) {
-          $prototype.remove();
-  
-          e.preventDefault(); // évite qu'un # apparaisse dans l'URL
-          return false;
-        });
-      }
     });
-  </script> 
-
-{% endblock musee_body %}
+    </script> 
+    {% endblock javascripts %}

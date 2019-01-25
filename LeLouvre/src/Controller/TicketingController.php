@@ -15,6 +15,7 @@ use App\Entity\Reservation;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use App\Services\GivePrice;
+use App\Services\Payment;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 
@@ -68,13 +69,17 @@ class TicketingController extends AbstractController {
     /**
      * @Route("/summary", name="summary")
      */
-    public function summary(SessionInterface $session, GivePrice $givePrice) {
+    public function summary(SessionInterface $session, GivePrice $givePrice,Payment $payment) {
         $reservation = $session->get('Reservation');
+        $givePrice->givePrice($reservation);
+        $totalPrix = $givePrice->totalPrice($reservation);
+        //$payment->paid($totalPrix);
 
-        $testService = $givePrice->totalPrice($reservation);
+
 
         return $this->render('reservation/summary.html.twig', [
-            'reservation' => $reservation
+            'reservation' => $reservation,
+            'totalPrix' => $totalPrix
         ]);
     }
 }

@@ -69,6 +69,15 @@ class Reservation
         $this->billets = new ArrayCollection();
     }
 
+    public function getTotalBillets() {
+        $billets = $this->getBillets();
+        $total = 0;
+        foreach($billets as $billet) {
+            $total += 1;
+        }
+        return $total;
+    }
+
     public function getId(): ?int
     {
         return $this->id;

@@ -24,25 +24,92 @@
                 <p>{{reservation.dateVisite|date("d/m/Y")}}</p>
             </div>
             <div class="col-md-4 text-center">
-                <h4>Nombre de réservation faite</h4>
-                <p>{{reservation.getBillets}}</p>
+                <h4>Nombre de réservation :</h4>
+                <p> {{reservation.getTotalBillets}} </p>
             </div>
         </div>
 
         <hr>
 
         <div class="row">
-            <div class="col-md-12 text-center">
+            <div class="col-md-12 text-center mb-4">
                 <h1>Vos billets</h1>
             </div>
         </div>
 
         
-    
+        <!-- Modal -->
+        <div class="row text-center mb-4">
+        {% for billet in reservation.billets %}
+        <!-- Button trigger modal -->
+        <div class="col-md-3">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+                Billet de {{billet.prenom}} {{billet.nom}}
+            </button>
+            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Reservation</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-md-3">
+                                <h4>Nom :</h4>
+                                <p>{{billet.nom}}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Prénom :</h4>
+                                <p>{{billet.prenom}}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Né(e) le :</h4>
+                                <p>{{billet.naissance|date("d/m/Y")}}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Pays :</h4>
+                                <p>{{billet.pays}}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Visite le :</h4>
+                                <p>{{reservation.dateVisite|date("d/m/Y")}}</p>
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Réduction :</h4>
+                                {% if billet.reduction %}
+                                <p>Oui</p>
+                                {% else %}
+                                <p>Non</p>
+                                {% endif %}
+                            </div>
+                            <div class="col-md-3">
+                                <h4>Prix :</h4>
+                                <p> {{billet.prix}}€</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      {% endfor %}
+        </div>
 
 
+        <hr>
 
-
+        
+        <div class="row">
+            <div class="col-md-12 text-right">
+                <h3>Coût total :</h3>
+                <h4> {{totalPrix}} €</h4>
+            </div>
+        </div>
     </div>
     
 {% endblock musee_body %}
