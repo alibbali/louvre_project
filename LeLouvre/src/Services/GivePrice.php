@@ -12,10 +12,16 @@ class GivePrice {
 
             foreach($reservation->getBillets() as $billet) {
                 $naissance = $billet->getNaissance();
+                $reduction = $billet->getReduction();
                 $age = $today->diff($naissance);
                 $age = $age->format('%y');
 
-                if($age > 60) {
+                
+                //Si la réduction est coché est qu'il
+                if($reduction == true && $age > 12){
+                    $billet->setPrix(10);
+                }
+                elseif($age > 60) {
                     $billet->setPrix(12);
                 }
                 elseif($age > 12 && $age < 60) {
