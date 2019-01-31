@@ -6,13 +6,14 @@ class Payment {
 
     public function paid($value) {
 
-        \Stripe\Stripe::setApiKey('sk_test_xB9p9DMEguzDzlc7MGIA2Wpr');
-        $charge = \Stripe\Charge::create([
-            'amount' => $value,
-            'currency' => 'eur',
-            'source' => 'tok_visa'
-            ]);
+        \Stripe\Stripe::setApiKey("sk_test_xB9p9DMEguzDzlc7MGIA2Wpr");
 
-        echo $charge;
+        \Stripe\Charge::create([
+          "amount" => 2000,
+          "currency" => "eur",
+          "source" => "tok_amex", // obtained with Stripe.js
+          "description" => "Charge for jenny.rosen@example.com"
+        ]);
+    
     }
 }
