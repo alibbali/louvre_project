@@ -4,16 +4,17 @@ namespace App\Services;
 
 class Payment {
 
-    public function paid($value) {
+    public function paid($value, $stripeToken) {
 
         \Stripe\Stripe::setApiKey("sk_test_xB9p9DMEguzDzlc7MGIA2Wpr");
 
-        \Stripe\Charge::create([
-          "amount" => 2000,
+      $response = \Stripe\Charge::create([
+          "amount" => $value * 100,
           "currency" => "eur",
-          "source" => "tok_amex", // obtained with Stripe.js
+          "source" => $stripeToken, // obtained with Stripe.js
           "description" => "Charge for jenny.rosen@example.com"
         ]);
-    
+            
+        return $response;
     }
 }

@@ -6,12 +6,29 @@
 {% block musee_body %}
     <div class="container-fluid">
 
-        <div class="row mt-4 bloc-bienvenue">
-            <div class="col-md-6 block-center" id="titre">
+        {% for message in app.flashes('notice') %}
+            <div class="flash-notice">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
+        <div class="row row-bienvenue">
+            <div class="col-md-6 block-center bloc-bienvenue" id="titre">
 
                 <h3>Bienvenue au</h3>
                 <h1>Musée du Louvre</h1>
                 <a href="{{path('reservation')}}" class="btn btn-light">Acheter un billet</a>
+            </div>
+
+            <div class="col-md-4">
+                {#<img src="{{asset('img/les-noces.jpg')}}" alt="les-noces" id="les-noces">#}
+                <p>Ici il y aura une image</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Nouveau Contenu</h1>
             </div>
         </div>
       

@@ -1,7 +1,15 @@
-body {
-    background-color: rgb(186, 197, 229);
+.row-bienvenue {
+    background-color: rgb(96, 141, 94);
+    height: 400px;
 }
 
 .bloc-bienvenue {
-    margin: 25px;
+    margin-top: 100px;
+    margin-left: 150px;
+}
+
+#les-noces {
+    margin-right: 60px;
+    margin-top: 70px;
+    z-index: 5;
 }

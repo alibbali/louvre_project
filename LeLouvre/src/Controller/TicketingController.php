@@ -73,13 +73,50 @@ class TicketingController extends AbstractController {
         $reservation = $session->get('Reservation');
         $givePrice->givePrice($reservation);
         $totalPrix = $givePrice->totalPrice($reservation);
-        //$payment->paid($totalPrix);
-
-
 
         return $this->render('reservation/summary.html.twig', [
             'reservation' => $reservation,
             'totalPrix' => $totalPrix
         ]);
+    }
+
+    /**
+     * @Route("/charge", name="charge")
+     */
+    public function charge(SessionInterface $session, GivePrice $givePrice, Payment $payment, \Swift_Mailer $mailer, ObjectManager $em){
+        $reservation = $session->get('Reservation');
+        $stripeToken = $_POST['stripeToken'];
+        //mail
+        $email = $_POST['email'];
+        //prixTotal
+        $totalPrix = $givePrice->totalPrice($reservation);
+        $transaction = $payment->paid($totalPrix, $stripeToken);
+        if($transaction->status == "succeeded") {
+            //Je set l'entité avec le mail
+            $reservation->setEmail($email);
+            //Je persiste
+            //$em->persist($reservation);
+            //J'envoie un mail
+            $message = (new \Swift_Message('Test email'))
+                       ->setFrom('brian.alibali@gmail.com')
+                       ->setTo('brian.alibali@gmail.com')//remplacé par $email
+                       ->setBody('Ceci est un essage texte, restera à créer une vue pour avoir un jolie mail générique.')
+                       ;
+            $mailer->send($message);
+            
+            //Flush
+            //Redirection page de confirmationd e paiement
+            $flash = $this->addFlash('notice', 'Nous vous avons envoyé un mail de confiramtion, à btientôt ! :)');
+            return $this->render('pages/home.html.twig', [
+                'notice' => $flash
+            ]);
+            //Détruire la session à la fin
+        } else {
+            $flash = $this->addFlash('notice', 'Il y a eu une erreur lors du paiement, merci de réessayer');
+            return $this->redirectToRoute('home', [
+                'notice' => $flash
+            ]);
+        }
+
     }
 }
