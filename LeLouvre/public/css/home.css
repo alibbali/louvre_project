@@ -1,15 +1,53 @@
 .row-bienvenue {
-    background-color: rgb(96, 141, 94);
-    height: 400px;
+    height: 650px;
 }
 
-.bloc-bienvenue {
-    margin-top: 100px;
-    margin-left: 150px;
+#joconde, #contenue-bienvenue {
+    height: 650px;
+}
+#joconde {
+    background: url('../img/joconde.jpg');
 }
 
-#les-noces {
-    margin-right: 60px;
-    margin-top: 70px;
-    z-index: 5;
+#contenue-bienvenue {
+    background-color: black;
+    color: whitesmoke;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.billeterie, .evenements,.infos, .contact {
+    height: 200px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact {
+    background-color: #4d68ff;
+}
+.infos {
+    background-color: #4da0ff;
+}
+
+.infos > a, .contact > a {
+    color: black;
+    font-size: 2em;
+    letter-spacing: 4px;
+}
+
+.billeterie {
+    background-color: #FFE44D;
+}
+
+.evenements {
+    background-color: whitesmoke;
+}
+
+
+.billeterie > a, .evenements > a {
+    color: black;
+    font-size: 3em;
+    letter-spacing: 4px;
 }

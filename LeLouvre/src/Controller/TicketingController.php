@@ -70,6 +70,7 @@ class TicketingController extends AbstractController {
      * @Route("/summary", name="summary")
      */
     public function summary(SessionInterface $session, GivePrice $givePrice,Payment $payment) {
+
         $reservation = $session->get('Reservation');
         $givePrice->givePrice($reservation);
         $totalPrix = $givePrice->totalPrice($reservation);
@@ -95,25 +96,29 @@ class TicketingController extends AbstractController {
             //Je set l'entité avec le mail
             $reservation->setEmail($email);
             //Je persiste
-            //$em->persist($reservation);
+            $em->persist($reservation);
             //J'envoie un mail
-            $message = (new \Swift_Message('Test email'))
+/*             echo '<pre>';
+            var_dump($reservation);
+            die;
+            echo '</pre>';
+*/          $message = (new \Swift_Message('Test email'))
                        ->setFrom('brian.alibali@gmail.com')
-                       ->setTo('brian.alibali@gmail.com')//remplacé par $email
-                       ->setBody('Ceci est un essage texte, restera à créer une vue pour avoir un jolie mail générique.')
-                       ;
+                       ->setTo($reservation->getEmail())
+                       ->setBody('Ceci est un message texte, restera à créer une vue pour avoir un beau mail générique.');
+                                    
             $mailer->send($message);
-            
-            //Flush
-            //Redirection page de confirmationd e paiement
-            $flash = $this->addFlash('notice', 'Nous vous avons envoyé un mail de confiramtion, à btientôt ! :)');
+            $em->flush();
+            //Redirection page de confirmation de paiement
+            $session->invalidate();
+            $flash = $this->addFlash('notice', 'Regardez dans votre boite mail, vos billets seront bientôt là ! :)');
             return $this->render('pages/home.html.twig', [
                 'notice' => $flash
             ]);
             //Détruire la session à la fin
         } else {
             $flash = $this->addFlash('notice', 'Il y a eu une erreur lors du paiement, merci de réessayer');
-            return $this->redirectToRoute('home', [
+            return $this->redirectToRoute('reservation', [
                 'notice' => $flash
             ]);
         }

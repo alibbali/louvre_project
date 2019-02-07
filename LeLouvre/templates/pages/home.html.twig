@@ -8,21 +8,50 @@
 
         {% for message in app.flashes('notice') %}
             <div class="flash-notice">
-                {{ message }}
+                <p class="btn btn-success">{{ message }}</p>
             </div>
         {% endfor %}
-        
-        <div class="row row-bienvenue">
-            <div class="col-md-6 block-center bloc-bienvenue" id="titre">
 
-                <h3>Bienvenue au</h3>
-                <h1>Musée du Louvre</h1>
-                <a href="{{path('reservation')}}" class="btn btn-light">Acheter un billet</a>
+        <div class="row row-bienvenue">
+            <div class="col-md-7">
+                <div class="row">
+                    <div class="col-md-6" id="contenue-bienvenue">
+                        <div>
+                            <h3>Bienvenue au</h3>
+                            <h1>Musée du Louvre</h1>
+                        </div>
+                    </div>
+                    <div class="col-md-6" id="joconde">
+                    </div>
+                </div>
             </div>
 
-            <div class="col-md-4">
-                {#<img src="{{asset('img/les-noces.jpg')}}" alt="les-noces" id="les-noces">#}
-                <p>Ici il y aura une image</p>
+            <div class="col-md-5">
+                <div class="row infos-contact">
+                    <div class="col-md-6 infos">
+                        <a href="{{path('infos')}}">
+                        <p>Infos<br>Pratiques</p>
+                        </a>
+                    </div>
+                    <div class="col-md-6 contact"> 
+                        <a href="">
+                        <p>Contact</p>
+                        </a>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-12 billeterie">
+                        <a href="{{path('reservation')}}">
+                        <p>Billeterie</p>
+                        </a>
+                    </div>
+                    <div class="col-md-12 evenements">
+                        <a href="">
+                            <p>Les prochains évènements</p>
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
 

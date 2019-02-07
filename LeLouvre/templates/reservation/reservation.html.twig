@@ -9,7 +9,7 @@
         <div class="row">
             {% for message in app.flashes('success') %}
                 <div class="col-md-12 mx-auto alert alert-success">
-                    {{message}}
+                    <p class="btn btn-success">{{ message }}</p>
                 </div>
             {% endfor %}
         </div>
