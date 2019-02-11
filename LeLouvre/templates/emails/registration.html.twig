@@ -1,0 +1,34 @@
+<h4>Bonjour,</h4>
+<p>Nous vous informons que votre commande a bien été enregistré.
+    Merci de vous munir de ce mail qui fera office de billet le jour de la visite</p>
+<h4>Ci après les informations à montrer à nos collaborateurs présent à l'accueil du Musée :</h4>
+<h4>Votre numéro de commande : <i>{{reservation.serialNumber}}</i></h4>
+<table class="table table-striped table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Prénom</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Date de naissance</th>
+            <th scope="col">Date de visite</th>
+            <th scope="col">Reduction</th>
+            <th scope="col">Prix</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for billet in reservation.billets %}
+            <tr>
+              <td>{{billet.prenom}}</td>
+              <td>{{billet.nom}}</td>
+              <td>{{billet.naissance|date("d/m/Y")}}</td>
+              <td>{{reservation.dateVisite|date("d/m/Y")}}</td>
+              <td>{% if billet.reduction %}Oui{% else %}Non{% endif %}</td>
+              <td>{{billet.prix}} €</td>
+            </tr>                        
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+<h4>Merci pour votre confiance, à bientot au Musée du Louvre !</h4>
+<h4>L'équipe du Louvre</h4>
+<p><img src="https://d29dpxox3qezd.cloudfront.net/uploads/mentor/5b90341546429354886302b8/logo.png?v=1541400943" alt="logo-louvre"></p>

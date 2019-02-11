@@ -104,7 +104,12 @@ class TicketingController extends AbstractController {
           $message = (new \Swift_Message('Test email'))
                        ->setFrom('brian.alibali@gmail.com')
                        ->setTo($reservation->getEmail())
-                       ->setBody('Ceci est un message texte, restera à créer une vue pour avoir un beau mail générique.');
+                       ->setBody($this->renderView(
+                           'emails/registration.html.twig',
+                           ['reservation' => $reservation]
+                       ),
+                       'text/html'
+                    );
                                     
             $mailer->send($message);
             $entityManager->flush();
