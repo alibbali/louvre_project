@@ -63,10 +63,10 @@ class Billets
     private $reduction;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="billets", cascade={"persist"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Reservation", inversedBy="billets")
+     * @ORM\JoinColumn(name="reservation_id", referencedColumnName="id")
      */
-    private $reservations;
+    private $reservation;
 
     public function getId(): ?int
     {

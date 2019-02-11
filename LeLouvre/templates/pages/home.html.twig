@@ -5,61 +5,53 @@
 {% endblock stylesheets %}
 {% block musee_body %}
     <div class="container-fluid">
-
-        {% for message in app.flashes('notice') %}
-            <div class="flash-notice">
-                <p class="btn btn-success">{{ message }}</p>
-            </div>
-        {% endfor %}
-
         <div class="row row-bienvenue">
-            <div class="col-md-7">
+            <div class="col-md-7" id="joconde">
                 <div class="row">
-                    <div class="col-md-6" id="contenue-bienvenue">
+                    <div class="col-md-12" id="contenue-bienvenue">
                         <div>
                             <h3>Bienvenue au</h3>
-                            <h1>Musée du Louvre</h1>
+                            <h1>Musée<br>du<br>Louvre</h1>
+                            {% for message in app.flashes('notice') %}
+                            <div class="flash-notice col-md-12">
+                                <p class="btn btn-success">{{ message }}</p>
+                            </div>
+                            {% endfor %}                
                         </div>
-                    </div>
-                    <div class="col-md-6" id="joconde">
                     </div>
                 </div>
             </div>
 
             <div class="col-md-5">
-                <div class="row infos-contact">
-                    <div class="col-md-6 infos">
-                        <a href="{{path('infos')}}">
-                        <p>Infos<br>Pratiques</p>
-                        </a>
+                <div class="row">
+                    <div class="col-md-6 infos-contact">
+                        <div class="row">
+                            <div class="infos col-md-12">
+                                <a href="{{path('infos')}}">
+                                    <h1>Infos<br>Pratiques</h1>
+                                </a>
+                            </div>
+                            <div class="contact col-md-12"> 
+                                <a href="">
+                                    <h1>Contact</h1>
+                                </a>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-6 contact"> 
-                        <a href="">
-                        <p>Contact</p>
+                    <div class="col-md-6 billeterie">
+                        <a href="{{path('reservation')}}">
+                        <h1>Billeterie</h1>
                         </a>
                     </div>
                 </div>
                 <div class="row">
 
-                    <div class="col-md-12 billeterie">
-                        <a href="{{path('reservation')}}">
-                        <p>Billeterie</p>
-                        </a>
-                    </div>
                     <div class="col-md-12 evenements">
                         <a href="">
-                            <p>Les prochains évènements</p>
+                            <h1>Les prochains évènements</h1>
                         </a>
                     </div>
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Nouveau Contenu</h1>
-            </div>
-        </div>
-      
-    </div>
 {% endblock musee_body %}

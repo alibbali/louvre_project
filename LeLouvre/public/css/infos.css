@@ -1,0 +1,17 @@
+.titre {
+    font-size: 5em;
+    letter-spacing: 6px;
+    color: whitesmoke;
+}
+
+.bloc-titre {
+    background-color: #17a2b8;
+}
+
+.louvre2 {
+    width: inherit;
+}
+
+.louvre-map {
+    width: inherit;
+}

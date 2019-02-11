@@ -56,7 +56,6 @@ class TicketingController extends AbstractController {
 
         if($form->isSubmitted() && $form->isValid()) {
             $session->set('Reservation', $reservation);
-
             //Redirection vers la fin du paiement avec email + Stripe
             return $this->redirectToRoute('summary');
         }
@@ -96,23 +95,23 @@ class TicketingController extends AbstractController {
             //Je set l'entité avec le mail
             $reservation->setEmail($email);
             //Je persiste
-            $em->persist($reservation);
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($reservation);
             //J'envoie un mail
-/*             echo '<pre>';
-            var_dump($reservation);
+/*             dump($reservation);
             die;
-            echo '</pre>';
-*/          $message = (new \Swift_Message('Test email'))
+ */            
+          $message = (new \Swift_Message('Test email'))
                        ->setFrom('brian.alibali@gmail.com')
                        ->setTo($reservation->getEmail())
                        ->setBody('Ceci est un message texte, restera à créer une vue pour avoir un beau mail générique.');
                                     
             $mailer->send($message);
-            $em->flush();
+            $entityManager->flush();
             //Redirection page de confirmation de paiement
             $session->invalidate();
             $flash = $this->addFlash('notice', 'Regardez dans votre boite mail, vos billets seront bientôt là ! :)');
-            return $this->render('pages/home.html.twig', [
+            return $this->redirectToRoute('home', [
                 'notice' => $flash
             ]);
             //Détruire la session à la fin

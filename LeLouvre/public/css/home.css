@@ -10,44 +10,60 @@
 }
 
 #contenue-bienvenue {
-    background-color: black;
+    /* background-color: #1B5465; */
     color: whitesmoke;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 80px;
+}
+
+#contenue-bienvenue h1 {
+    font-size: 5em;
+}
+
+.infos-contact {
+    height: 250px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-.billeterie, .evenements,.infos, .contact {
-    height: 200px;
+.infos, .contact {
+    height: 125px;
+}
+
+.billeterie {
+    height: 250px;
+}
+.evenements {
+    height: 400px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 .contact {
-    background-color: #4d68ff;
+    background-color: #1B2F65;
 }
 .infos {
     background-color: #4da0ff;
 }
 
 .infos > a, .contact > a {
-    color: black;
-    font-size: 2em;
-    letter-spacing: 4px;
+    color: whitesmoke;
 }
 
 .billeterie {
-    background-color: #FFE44D;
+    background-color: #651B2F;
 }
 
 .evenements {
-    background-color: whitesmoke;
+    background-color: #4da0ff;
 }
 
 
 .billeterie > a, .evenements > a {
-    color: black;
-    font-size: 3em;
+    color: whitesmoke;
     letter-spacing: 4px;
 }

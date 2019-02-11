@@ -52,7 +52,7 @@ class Reservation
     private $type;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="reservations", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="reservation", cascade={"persist"})
      * @Assert\Valid()
      */
     private $billets;

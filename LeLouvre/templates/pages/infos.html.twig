@@ -1,76 +1,71 @@
 {% extends "base.html.twig" %}
 
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/infos.css')}}">
+{% endblock stylesheets %}
+
 {% block musee_body %}
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="col-md-12">
-            <div class="jumbotron">
-                <h1 class="text-center">Toutes les infos pratiques sur le musée du louvre</h1>
-                <h4 class="text-center">Nous avons récemment mis à jour notre systeme de billeterie avec un systéme de réservation en ligne.</br>
-                Voici les tarifs proposé par le musée. Bonne visite !</h4>
-            </div>
+    <div class="row mt-5 bloc-titre">
+        <div class="col-md-6">
+            <h1 class="titre">Infos Pratiques</h1>
         </div>
     </div>
 
-        <div class="card-deck mb-3 text-center mt-4">
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Normal</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"><small class="text-muted">16 €</small></h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>Tarifs à partir de 16 ans</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Enfant</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title"><small class="text-muted">8 €</small></h1>
-                    <ul class="list-unstyled mt-3 mb-4">
-                        <li>A partir de 4 ans</li>
-                        <li>Jusqu'a 12 ans</li>
-                        <li>L'entrée est gratuite pour les</li>
-                        <li>enfants de moins de 4 ans</li>
-                    </ul>
-                </div>
-            </div>
-            <div class="card mb-4 shadow-sm">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">Sénior</h4>
-          </div>
-          <div class="card-body">
-              <h1 class="card-title pricing-card-title"><small class="text-muted">12 €</small></h1>
-              <ul class="list-unstyled mt-3 mb-4">
-                  <li>Pour les plus de 60 ans</li>
-                </ul>
-            </div>
+    <div class="row mt-5">
+        <div class="col-md-7">
+                <img src="{{asset('img/louvre2.jpg')}}" class="louvre2" alt="">
+                <hr>
+                <iframe class="louvre-map" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d30319.241650253916!2d2.3343901925786645!3d48.86360757617455!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb975fcfa192f84d4!2sMus%C3%A9e+du+Louvre!5e0!3m2!1sfr!2sfr!4v1549572526536" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <hr>
+                <img src="{{asset('img/logo-louvre.png')}}" class="louvre2" alt="">
         </div>
-    </div>
-    
-    <div class="row">
-        <div class="col-md-12 text-center">
-                <p><a class="btn btn-primary" href="{{path('reservation')}}">Réserver un ou plusieurs billets</a></p>
+        <div class="col-md-5">
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Adresse</h3>
+                    <p>Rue de Rivoli, <br> 75 001 Paris</p>
+                    <p>+ 33 (0)1 40 20 50 50</p>
+                </div>
             </div>
-    </div>
-    
-    <div class="row mt-4">
-        <div class="col-md-12 text-center">
-            <h1 class="">Les Horaires</h1>
-        </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <h3>Horaires</h3>
+                    <p>Ouvert tous les jours de 9h à 18h sauf le mardi</p>
+                    <h3>Fermeture</h3>
+                    <p>le 1er Mai, 1er Novembre et 25 Décembre</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    .<div class="jumbotron">
+                        <h1 class="display-3">Infos Tarifaires</h1>
+                        <p class="lead"></p>
+                        <hr class="my-2">
+                        <p>More info</p>
+                        <p class="lead">
+                            <p>Tarif plein : 16 €</p>
+                            <p>Tarif réduit : 10 €</p>
+                            <p>Tarif enfant (4-12 ans) : 8 €</p>
+                            <p>Tarif sénior : 12 €</p>
+                            <p>Gratuit pour les moins de 4 ans</p>
+                            <p>Conditions de tarif réduit à 10 € :<br>
+                                – Étudiants sur présentation de la carte étudiant de l’année en cours.<br>
+                                – Personne handicapée et son accompagnateur sur présentation d’un justificatif, en cours de validité et délivré par les Maisons Départementales des Personnes Handicapées (MDPH)<br>
+                                – Demandeur d’emploi sur présentation d’une attestation en cours de validité ou de moins de 6 mois délivrée par Pôle-Emploi et d’une pièce d’identité avec photo.<br>
+                                – Bénéficiaire de minima sociaux (selon la définition du Ministère des Solidarités et de la Santé), et ses ayants-droits mentionnés sur l’attestation, sur présentation de l’attestation en cours de validité et de pièces d’identité avec photo.<br>
+                                – Détenteurs du Pass Sénior de la Ville de Paris
+                            </p>
+                            <p><a class="btn btn-info" href="{{path('reservation')}}">Réserver vos billets</a></p>
 
-        <div class="col-md-5 mx-auto text-center">
-            <ul class="list-group">
-                <li class="list-group-item">Du Lundi au Dimanche sauf le mardi et jours férié</li>
-                <li class="list-group-item">Ouverture de 9h à 19h</li>
-            </ul>
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-    
-    
+        
 </div>
 {% endblock musee_body %}
