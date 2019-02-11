@@ -164,7 +164,7 @@ class Reservation
     {
         if (!$this->billets->contains($billet)) {
             $this->billets[] = $billet;
-            $billet->setReservations($this);
+            $billet->setReservation($this);
         }
 
         return $this;
@@ -175,8 +175,8 @@ class Reservation
         if ($this->billets->contains($billet)) {
             $this->billets->removeElement($billet);
             // set the owning side to null (unless already changed)
-            if ($billet->getReservations() === $this) {
-                $billet->setReservations(null);
+            if ($billet->getReservation() === $this) {
+                $billet->setReservation(null);
             }
         }
 

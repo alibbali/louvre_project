@@ -33,7 +33,9 @@ class ReservationType extends AbstractType
             'label' => false,
             'entry_type' => BilletsType::class,
             'allow_add' => true,
-            'allow_delete' => true
+            'allow_delete' => true,
+            'prototype' => true,
+            'by_reference' => false
         ])
         ->add('save', SubmitType::class, [
             'label' => "Passer commande"

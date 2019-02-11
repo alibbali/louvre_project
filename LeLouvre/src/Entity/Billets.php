@@ -157,14 +157,14 @@ class Billets
         return $this;
     }
  */
-    public function getReservations(): ?Reservation
+    public function getReservation(): ?Reservation
     {
-        return $this->reservations;
+        return $this->reservation;
     }
 
-    public function setReservations(?Reservation $reservations): self
+    public function setReservation(?Reservation $reservation): self
     {
-        $this->reservations = $reservations;
+        $this->reservation = $reservation;
 
         return $this;
     }
