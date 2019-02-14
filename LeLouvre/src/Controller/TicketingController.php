@@ -71,6 +71,7 @@ class TicketingController extends AbstractController {
     public function summary(SessionInterface $session, GivePrice $givePrice,Payment $payment) {
 
         $reservation = $session->get('Reservation');
+
         $givePrice->givePrice($reservation);
         $totalPrix = $givePrice->totalPrice($reservation);
 
@@ -97,11 +98,8 @@ class TicketingController extends AbstractController {
             //Je persiste
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($reservation);
-            //J'envoie un mail
-/*             dump($reservation);
-            die;
- */            
-          $message = (new \Swift_Message('Test email'))
+            //Mail
+            $message = (new \Swift_Message('Test email'))
                        ->setFrom('brian.alibali@gmail.com')
                        ->setTo($reservation->getEmail())
                        ->setBody($this->renderView(

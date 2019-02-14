@@ -26,12 +26,18 @@ class NotAllowedDateValidator extends ConstraintValidator
         //Je transforme l'objet en array pour récuperer uniquement la date
         $value = get_object_vars($value);
         $date = $value['date'];
+        $today = date('d/m/y');
 
+        
         //Je formate de façon à récuperer les éléments voulus
         $formatedDate = date('m/d', strtotime($date));
         $daysOfFormattedDate = date('N', strtotime($date));
         $formatedTime = date('H:i', strtotime($date));
-
+        
+        /* echo '<pre>';
+        var_dump($date, $today, $formatedDate, $daysOfFormattedDate, $formatedTime);
+        die;
+        echo '</pre>'; */
         //ici sera la liste complête des jours fériés que je dois mettre au format anglais sinon cela ne fonctionne pas....
         $notAllowedDate = ["05/01", "12/25", "11/01"];
         

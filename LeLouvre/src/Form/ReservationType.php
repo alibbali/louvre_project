@@ -21,8 +21,8 @@ class ReservationType extends AbstractType
     {
         $builder
         ->add('dateVisite', DateType::class, [
-            'format' => 'dd-MM-yyyy',
-        ])
+                'format' => 'dd-MM-yyyy'
+            ])
         ->add('type', ChoiceType::class, [
             'choices' => [
                 'Journée' => true,

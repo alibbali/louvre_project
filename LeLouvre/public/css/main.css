@@ -1,6 +1,4 @@
 .navbar {
-    background-color: whitesmoke !important;
-    border-bottom: 1px solid black;
     height: 80px;
 }
 
@@ -9,11 +7,15 @@
 }
 
 .nav-link, .navbar-brand {
-    color: #17a2b8 !important;
+    color: #0d1213 !important;
     letter-spacing: 3px;
 }
 
 .nav-link {
     font-size: 1.1em;
     margin-right: 50px;
+}
+
+a:hover {
+    text-decoration: none;
 }

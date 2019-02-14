@@ -16,6 +16,7 @@
     justify-content: flex-end;
     align-items: center;
     padding-right: 80px;
+    text-align: right;
 }
 
 #contenue-bienvenue h1 {
@@ -24,30 +25,24 @@
 
 .infos-contact {
     height: 250px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
 }
 
 .infos, .contact {
-    height: 125px;
+    height: 150px;
 }
 
 .billeterie {
-    height: 250px;
+    height: 300px;
 }
 .evenements {
-    height: 400px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    height: 350px;
 }
 
 .contact {
     background-color: #1B2F65;
 }
 .infos {
-    background-color: #4da0ff;
+    background-color: #3A5AA3;
 }
 
 .infos > a, .contact > a {
@@ -55,11 +50,11 @@
 }
 
 .billeterie {
-    background-color: #651B2F;
+    background-color: #3A8EA3;
 }
 
 .evenements {
-    background-color: #4da0ff;
+    background-color: slategray;
 }
 
 
