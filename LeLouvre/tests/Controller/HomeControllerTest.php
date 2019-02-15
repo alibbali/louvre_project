@@ -18,4 +18,15 @@ class HomeControllerTest extends WebTestCase
             $client->getResponse()->getStatusCode()
         );
     }
+
+    public function testInfosPagesIsUs()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/infos');
+
+        static::assertEquals(
+            Response::HTTP_OK,
+            $client->getResponse()->getStatusCode()
+        );
+    }
 }
