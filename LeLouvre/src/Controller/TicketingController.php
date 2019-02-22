@@ -58,10 +58,6 @@ class TicketingController extends AbstractController {
             if($form->isValid()) {
                 $session->set('Reservation', $reservation);
                 //Redirection vers la fin du paiement avec email + Stripe
-                echo'<pre>';
-                var_dump($reservation);
-                die;
-                echo '</pre>';
                 return $this->redirectToRoute('summary');
             }
             else {
