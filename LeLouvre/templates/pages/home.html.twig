@@ -14,7 +14,7 @@
                             <h1>Musée<br>du<br>Louvre</h1>
                             {% for message in app.flashes('notice') %}
                             <div class="flash-notice col-md-12">
-                                <p class="btn btn-success">{{ message }}</p>
+                                <div class="jumbotron">{{ message }}</div>
                             </div>
                             {% endfor %}                
                         </div>

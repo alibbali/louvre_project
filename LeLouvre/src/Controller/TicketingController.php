@@ -54,11 +54,23 @@ class TicketingController extends AbstractController {
 
         $form->handleRequest($request);
 
-        if($form->isSubmitted() && $form->isValid()) {
-            $session->set('Reservation', $reservation);
-            //Redirection vers la fin du paiement avec email + Stripe
-            return $this->redirectToRoute('summary');
+        if($form->isSubmitted()) {
+            if($form->isValid()) {
+                $session->set('Reservation', $reservation);
+                //Redirection vers la fin du paiement avec email + Stripe
+                echo'<pre>';
+                var_dump($reservation);
+                die;
+                echo '</pre>';
+                return $this->redirectToRoute('summary');
+            }
+            else {
+                return $this->render('reservation/reservation.html.twig', [
+                    'form' => $form->createView(),
+                ]);                        
+            }
         }
+
     
     return $this->render('reservation/reservation.html.twig', [
             'form' => $form->createView()

@@ -29,7 +29,7 @@ class BilletsType extends AbstractType
                 'month' => 'Mois',
                 'year' => 'Année',
             ],
-            'format' => 'dd-MM-yyyy'
+            'format' => 'ddMMyyyy'
         ])
         ->add('pays', CountryType::class)
         ->add('reduction')

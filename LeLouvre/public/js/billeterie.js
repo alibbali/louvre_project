@@ -1,40 +1,54 @@
-$(document).ready(function() {
+$(function() {
+    let container = $('#reservation_billets');
+    let reservation = $('#reservation_save');
+    //Définition d'un numéro de billet pour chaque entrée
+    let index = container.find(':input').length;
 
-    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-let $container = $('#reservation_billets');
-        
-// On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-let index = $container.find(':input').length;
+    //Si index inférieur ou égal à 0 alors on n'affiche pas le bouton commander pour éviter les erreurs
+    $('#add_category').click(function (e) {
+        addBillets(container); 
 
-let compteur = $('#compteur');
-let recap = $('#recap');
-recap.hide();
-// On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-$('#ajouter').click(function(e) {
-  if(compteur.val() <= 0) {
-      $('#ajouter').show();
-  }
-  else {
-      $('#recap').show();
-      $('#ajouter').hide();
-  }
-let nbBillets = compteur.val();
-for(let i = 0; i < nbBillets ; i ++){
-    addReservation($container);
-}
-e.preventDefault(); // évite qu'un # apparaisse dans l'URL
+        e.preventDefault();
+        return false;
+    });
 
-return false;
-});
+    //Ajout d'un premier billet si il n'en existe pas.
+    if(index == 0) {
+        addBillets(container);
+    }
+    else {
+        container.children('div').each(function(){
+            addDeleteLink($(this));
+        })
+    }
 
-function addReservation($container) {
-var template = $container.attr('data-prototype')
-  .replace(/__name__label__/g, 'Billet n°' + (index+1))
-  .replace(/__name__/g, index)
-;
 
-var $prototype = $(template);
-$container.append($prototype);
-index++;
-}
+
+
+    //Function addBillets
+
+    function addBillets($container ) {
+        let template = $container.attr('data-prototype')
+            .replace(/__name__label__/g, 'Billets n°' + (index+1))
+            .replace(/__name__/g, index);
+
+        let prototype = $(template);
+        addDeleteLink(prototype);
+        $container.append(prototype);
+        index ++;
+    }
+
+    function addDeleteLink($prototype) {
+
+        let button = $('<a href="#" class="btn btn-warning">Supprimer ce billet</a>');
+
+        $prototype.append(button);
+
+        button.click(function(e){
+            $prototype.remove();
+            index --;
+            e.preventDefault();
+            return false;
+        })
+    }
 });

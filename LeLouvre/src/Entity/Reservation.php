@@ -53,6 +53,7 @@ class Reservation
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Billets", mappedBy="reservation", cascade={"persist"})
+     * @Assert\IsNull()
      * @Assert\Valid()
      */
     private $billets;

@@ -15,80 +15,47 @@
                 <h1 class="text-center titre-billeterie">Billeterie</h1>
             </div>
         </div>
-        
-        
+ 
         <hr>
 
-        {% for message in app.flashes('success') %}
-            <div class="row">
-                <div class="col-md-12 mx-auto alert alert-success">
-                    <p class="btn btn-success">{{ message }}</p>
-                </div>
-            </div>
-        {% endfor %}
-        
         {{form_start(form)}}
 
         <div class="row">
-            <div class="col-md-12 mx-auto">
-                {{form_errors(form)}}
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-4">
                 {{form_row(form.dateVisite)}}
             </div>
-            <div class="col-md-4 mx-auto">
+            <div class="col-md-4">
                 {{form_row(form.type)}}
             </div>
-            <div class="col-md-4 mx-auto">
-                <label for="quantite">Nombre de réservations</label>
-                    <div class="input-group">
-                        <select class="custom-select" id="compteur" required>
-                            <option value="">Nombres de billets souhaités</option>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                            <option value="5">5</option>
-                            <option value="6">6</option>
-                            <option value="7">7</option>
-                            <option value="8">8</option>
-                            <option value="9">9</option>
-                            <option value="10">10</option>
-                        </select>
-                </div>
-            </div>
         </div>
-        
-        <div class="row mt-4">
-            <div class="col-md-12 mx-auto">
-                <p class="text-center btn btn-info" id="ajouter">Remplir les reservations</p>
-            </div>
-        </div>
-        
+
         <hr>
-        
+
         <div class="row">
+            <div class="col-md-4">
+                <h3>Vos billets</h3>
+            </div>
             <div class="col-md-12">
                 {{form_row(form.billets)}}
+                <a href="#" id="add_category" class="btn btn-info">Ajouter un billet</a>
             </div>
-        </div>
 
-        
-        <div class="row" id="recap">
-            <div class="col-md-12 text-right">
+            <div class="col-md-12 d-flex justify-content-end">
                 {{form_row(form.save)}}
+            </div>
+            
+            {{form_rest(form)}}
+
+            <div class="col-md-12">
+                {{form_end(form)}}
             </div>
         </div>
 
         <div class="row">
-            <div class="col-md-6 mx-auto">
-                    {{form_end(form)}}
+            <div class="col-md-12 block-center">
+                {{ parent() }}
             </div>
         </div>
-        {{ parent() }}       
     </div>
     
     {% endblock musee_body %}
