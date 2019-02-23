@@ -5,58 +5,41 @@
 {% endblock stylesheets %}
 {% block musee_body %}
     <div class="container-fluid">
-        <div class="row row-bienvenue">
-            <div class="col-md-7 col-sm-12" id="joconde">
-                <div class="row">
-                    <div class="col-md-12" id="contenue-bienvenue">
-                        <div>
-                            <h3>Bienvenue au</h3>
-                            <h1>Musée<br>du<br>Louvre</h1>
-                            {% for message in app.flashes('notice') %}
-                            <div class="flash-notice col-md-12">
-                                <div class="jumbotron">{{ message }}</div>
-                            </div>
-                            {% endfor %}                
-                        </div>
-                    </div>
-                </div>
+        {% for message in app.flashes('notice') %}
+        <div class="flash-notice col-md-12 mt-4">
+            <div class="jumbotron">{{ message }}</div>
+        </div>
+        {% endfor %}                
+        <div class="row">
+            <div class="col-md-7 col-sm-12 col-xs-12 landing d-flex justify-content-end align-items-center">
+                <h1 class="text-right text-uppercase">Musée du louvre</h1>
             </div>
-
-            <div class="col-md-5 col-sm-12">
-                <div class="row">
-                    <div class="col-md-6 col-sm-5 infos-contact">
-                        <div class="row">
-                            <div class="infos col-md-12 d-flex justify-content-center align-items-center">
-                                <a href="{{path('infos')}}">
-                                    <div class="d-flex justify-content-center mb-2"><i class="fas fa-lg align-items-center fa-info"></i></div>
-                                    <h3>INFOS<br>PRATIQUES</h3>
-                                </a>
-                            </div>
-                            <div class="contact col-md-12 d-flex justify-content-center align-items-center"> 
-                                <a href="">
-                                    <div class="d-flex justify-content-center mb-2"><i class="fas fa-lg align-items-center fa-file-signature"></i></div>
-                                    <h3>CONTACT</h3>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6 col-sm-7 billeterie d-flex justify-content-center align-items-center">
+            <div class="col-md-5">
+                <div class="row clic">
+                    <div class="col-md-12 col-sm-12 col-xs-12 billetterie d-flex flex-column justify-content-center align-items-center">
                         <a href="{{path('reservation')}}">
-                            <div class="d-flex justify-content-center mb-2"><i class="far fa-lg align-items-center fa-credit-card"></i></div>
-                            <h3>BILLETTERIE</h3>
+                            <hr>
+                            <h3 class="text-center">Billetterie</h3>
+                            <hr>
                         </a>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="evenements d-flex justify-content-center align-items-center col-md-12 col-sm-12">
-                        <a href="">
-                            <div class="d-flex justify-content-center"><i class="far fa-lg align-items-center fa-credit-card"></i></div>
-                            <h1>Les prochains évènements</h1>
+                    <div class="col-md-6 col-sm-12 col-xs-12 infos d-flex flex-column justify-content-center align-items-center">
+                        <a href="{{path('infos')}}">
+                            <hr>
+                            <h3 class="text-center">Infos Pratiques</h3>
+                            <hr>
+                        </a>
+                    </div>
+                    <div class="col-md-6 col-sm-12 col-xs-12 contact d-flex flex-column justify-content-center align-items-center">
+                        <a href="#">
+                            <hr>
+                            <h3 class="text-center">Contact</h3>
+                            <hr>
                         </a>
                     </div>
                 </div>
             </div>
-            {{ parent() }}
         </div>
-        </div>
+        {{ parent() }}
+    </div>
 {% endblock musee_body %}

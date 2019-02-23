@@ -76,21 +76,25 @@
 
         
         <div class="row">
-            <div class="col-md-12 text-right">
-                <h3>Coût total :</h3>
-                <h4> {{totalPrix}} €</h4>
+            <div class="col-md-12 d-flex flex-column justify-content-end align-items-end">
+                <div class="cout-total">
+                    <h3>Coût total :</h3>
+                    <h4 class="text-right"> {{totalPrix}} €</h4>
+                </div>
             </div>
         </div>
-
+        <hr>
         <div class="row">
-            <div class="col-md-8 mx-auto">
-
+            <div class="col-md-12">
+                <h3>Pour valider le paiement, merci d'insérer vos coordonnées ci dessous :</h3>
+            </div>
+            <div class="col-md-12">
                 <form action="/charge" method="post" id="payment-form">
                     <div class="form">
                         <label for="email">Votre email</label>
                         <div id="email" class=""><input type="email" name="email"></div>
                         <label for="card-element" class="">
-                            Credit or debit card
+                            Votre carte bancaire
                         </label>
                         <div id="card-element" class="">
                             <!-- A Stripe Element will be inserted here. -->
@@ -100,7 +104,7 @@
                         <div id="card-errors" role="alert" class=""></div>
                     </div>
                     
-                    <button>Submit Payment</button>
+                    <button>Payer</button>
                 </form>
             </div>
         </div>
@@ -111,5 +115,5 @@
 {% endblock musee_body %}
 {% block javascripts %}
 {{ parent() }}
-<script src="{{ asset('js/stripe.js') }}"></script>
+<script src="{{asset('js/stripe.js')}}"></script>
 {% endblock javascripts%}

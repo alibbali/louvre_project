@@ -2,3 +2,19 @@
     font-size: 5em;
     letter-spacing: 4px;
 }
+
+body {
+    background-color: #F2F8F8;
+}
+
+input, select {
+    background-color: #B3C9C9 !important;
+    border-radius: 0 !important;
+}
+
+.button-modal {
+    background-color: #B3C9C9 !important;
+    border: 1px solid #B3C9C9;
+    color: black;
+}
+

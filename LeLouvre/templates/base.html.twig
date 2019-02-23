@@ -11,21 +11,29 @@
         {% endblock %}
     </head>   
     <body>
-        <header class="masthead mb-auto">
-            <div class="inner">
-              <div class="masthead-brand text-center"><a class="navbar-brand" href="{{path('home')}}"> <img class="logo-menu" src="{{asset('../img/logo-louvre.png')}}" alt=""> </a>
-              </div>
-              <nav class="nav nav-masthead justify-content-center">
-                <a class="nav-link active" href="{{path('home')}}">Accueil</a>
-                <a class="nav-link" href="{{path('infos')}}">Infos Pratiques</a>
-                <a class="nav-link" href="{{path('reservation')}}">Billetterie</a>
-              </nav>
-            </div>
-          </header>
-        {% block musee_body %}
-        
-        <div class="row">
-            <div class="col-md-12 col-sm-12 py-3 d-flex justify-content-center">
+            <nav class="navbar navbar-dark">
+                    <a class="navbar-brand" href="{{path('home')}}">Le Louvre</a>
+                    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample01" aria-controls="navbarsExample01" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                    </button>
+                  
+                    <div class="navbar-collapse collapse" id="navbarsExample01">
+                      <ul class="navbar-nav mr-auto">
+                        <li class="nav-item active">
+                          <a class="nav-link" href="{{path('home')}}">Accueil<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{path('reservation')}}">Billetterie</a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link" href="{{path('infos')}}">Infos pratiques</a>
+                        </li>
+                      </ul>
+                    </div>
+                  </nav>
+        {% block musee_body %} 
+        <div class="row footer">
+            <div class="col-md-12 col-sm-12 py-2 d-flex justify-content-center align-items-center">
                 <p class="">Le musée du Louvre © Brian Alibali | Projet fictif dans le cadre de mes études.</p>
             </div>   
         </div>

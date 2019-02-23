@@ -125,7 +125,6 @@ class TicketingController extends AbstractController {
             return $this->redirectToRoute('home', [
                 'notice' => $flash
             ]);
-            //Détruire la session à la fin
         } else {
             $flash = $this->addFlash('notice', 'Il y a eu une erreur lors du paiement, merci de réessayer');
             return $this->redirectToRoute('reservation', [

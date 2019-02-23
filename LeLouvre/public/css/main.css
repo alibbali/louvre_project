@@ -1,21 +1,22 @@
-.navbar {
-    height: 80px;
+nav {
+    background-color: #595D60 !important;
 }
-
-.logo-menu {
-    width: 150px;
-}
-
-.nav-link, .navbar-brand {
-    color: #0d1213 !important;
-    letter-spacing: 3px;
-}
-
-.nav-link {
-    font-size: 1.1em;
-    margin-right: 50px;
-}
-
 a:hover {
     text-decoration: none;
 }
+
+* {
+    font-weight: 100 !important;
+}
+
+a {
+    font-weight: 100 !important;
+    letter-spacing: 4px;
+}
+
+a:hover {
+    text-decoration: none !important;
+    text-transform: none !important;
+    color: black;
+}
+

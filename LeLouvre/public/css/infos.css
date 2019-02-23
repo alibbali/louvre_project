@@ -1,17 +1,40 @@
-.titre {
-    font-size: 5em;
-    letter-spacing: 6px;
-    color: whitesmoke;
+body {
+    background-color: #67888D;
 }
 
-.bloc-titre {
-    background-color: #17a2b8;
+.reservation {
+    background-color: #595D60;
+    border: #595D60;
+    width: 500px;
 }
-
-.louvre2 {
-    width: inherit;
+.jumbotron {
+    background-color: #B3C9C9;
 }
 
 .louvre-map {
     width: inherit;
+}
+
+.footer {
+    background-color: #595D60;
+}
+
+h3 {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 2em;
+    font-weight: 100;
+}
+
+
+a {
+    font-weight: 100 !important;
+    letter-spacing: 4px;
+    color: black;
+}
+
+a:hover {
+    text-decoration: none !important;
+    text-transform: none !important;
+    color: black !important;
 }

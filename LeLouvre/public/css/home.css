@@ -1,68 +1,39 @@
-.row-bienvenue {
+h3 {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 2em;
+    font-weight: 100;
+}
+
+a {
+    color: rgb(0, 0, 0);
+}
+.landing {
     height: 650px;
+    background-color: #67888D;
+}
+.landing h1 {
+    font-size: 6em;
+    letter-spacing: 4px;
+    font-weight: 100;
 }
 
-#joconde, #contenue-bienvenue {
-    height: 650px;
-}
-#joconde {
-    background: url('../img/joconde.jpg');
-}
-
-#contenue-bienvenue {
-    /* background-color: #1B5465; */
-    color: whitesmoke;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding-right: 80px;
-    text-align: right;
-}
-
-#contenue-bienvenue h1 {
-    font-size: 5em;
-}
-
-.infos-contact {
-    height: 250px;
-}
-
-.infos, .contact {
-    height: 150px;
-}
-
-.billeterie {
-    height: 300px;
-}
-.evenements {
+.billetterie {
     height: 350px;
+    background-color: rgb(88, 96, 102);
+}
+
+.contact, .infos {
+    height: 300px;
 }
 
 .contact {
-    background-color: #1B2F65;
+    background-color: #B3C9C9;
 }
 .infos {
-    background-color: #3A5AA3;
+    background-color: #F2F8F8;
 }
 
-.infos > a, .contact > a {
-    color: whitesmoke;
-}
-
-.billeterie {
-    background-color: #3A8EA3;
-}
-
-.evenements {
-    background-color: slategray;
-}
-
-
-.billeterie > a, .evenements > a {
-    color: whitesmoke;
-    letter-spacing: 4px;
-}
-
-.jumbotron {
-    color: #3A8EA3;
+.footer {
+    background-color: #595D60;
 }
