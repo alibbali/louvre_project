@@ -1,0 +1,22 @@
+{% extends "base.html.twig" %}
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{asset('css/contact.css')}}">
+{% endblock stylesheets %}
+{% block musee_body %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-3">Contact</h1>
+                    <p class="lead">Pour toutes questions : <i>lemusee@louvre.fr</i></p>
+                    <hr class="my-2">
+                    
+                </div>
+            </div>
+            </div>
+        </div>
+        {{ parent() }}
+    </div>
+{% endblock musee_body %}
