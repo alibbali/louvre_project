@@ -29,8 +29,8 @@ $(function() {
 
     function addBillets($container ) {
         let template = $container.attr('data-prototype')
-            .replace(/__name__label__/g, 'Billets n°' + (index+1))
-            .replace(/__name__/g, index);
+            .replace(/__name__label__/g, 'Billets')
+            .replace(/__name__/g, 'Billets' + (index+1));
 
         let prototype = $(template);
         addDeleteLink(prototype);

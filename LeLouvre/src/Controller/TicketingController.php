@@ -13,7 +13,6 @@ use App\Form\ReservationType;
 use App\Entity\Billets;
 use App\Entity\Reservation;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Session\Session;
 use App\Services\GivePrice;
 use App\Services\Payment;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -108,7 +107,7 @@ class TicketingController extends AbstractController {
             $entityManager->persist($reservation);
             //Mail
             $message = (new \Swift_Message('Test email'))
-                       ->setFrom('brian.alibali@gmail.com')
+                       ->setFrom('billeterie@louvre.com')
                        ->setTo($reservation->getEmail())
                        ->setBody($this->renderView(
                            'emails/registration.html.twig',

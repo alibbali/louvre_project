@@ -19,7 +19,7 @@ class HomeControllerTest extends WebTestCase
         );
     }
 
-    public function testInfosPagesIsUs()
+    public function testInfosPagesIsUp()
     {
         $client = static::createClient();
         $client->request('GET', '/infos');
@@ -29,4 +29,16 @@ class HomeControllerTest extends WebTestCase
             $client->getResponse()->getStatusCode()
         );
     }
+
+    public function testContactPageIsUp()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/contact');
+
+        static::assertEquals(
+            Response::HTTP_OK,
+            $client->getResponse()->getStatusCode()
+        );
+    }
+    
 }

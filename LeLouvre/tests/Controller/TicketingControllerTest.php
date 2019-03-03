@@ -18,5 +18,14 @@ class TicketingControllerTest extends WebTestCase
         );
     }
 
+    public function testSummary()
+    {
+        $client = static::createClient();
+        $client->request('GET', '/summary');
 
+        static::assertEquals(
+            Response::HTTP_FOUND,
+            $client->getResponse()->getStatusCode()
+        );
+    }       
 }
