@@ -89,7 +89,7 @@
                 <h3>Pour valider le paiement, merci d'insérer vos coordonnées ci dessous :</h3>
             </div>
             <div class="col-md-12">
-                <form action="/charge" method="post" id="payment-form">
+                <form action="{{path('charge')}}" method="post" id="payment-form">
                     <div class="form">
                         <label for="email">Votre email</label>
                         <div id="email" class=""><input type="email" name="email"></div>

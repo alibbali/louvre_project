@@ -78,7 +78,9 @@ class TicketingController extends AbstractController {
     public function summary(SessionInterface $session, GivePrice $givePrice,Payment $payment) {
 
         $reservation = $session->get('Reservation');
-
+        if(empty($reservation)) {
+            return $this->redirectToRoute('home');
+        }
         $givePrice->givePrice($reservation);
         $totalPrix = $givePrice->totalPrice($reservation);
 
@@ -93,6 +95,9 @@ class TicketingController extends AbstractController {
      */
     public function charge(SessionInterface $session, GivePrice $givePrice, Payment $payment, \Swift_Mailer $mailer, ObjectManager $em){
         $reservation = $session->get('Reservation');
+        if(empty($reservation)) {
+            return $this->redirectToRoute('home');
+        }
         $stripeToken = $_POST['stripeToken'];
         //mail
         $email = $_POST['email'];

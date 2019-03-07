@@ -25,3 +25,33 @@
   .StripeElement--webkit-autofill {
     background-color: #fefde5 !important;
   }
+
+  .form label, #payment-form button {
+    margin-bottom: 20px;
+    margin-top: 40px;
+  }
+
+  .form label {
+    font-size: 1.5em;
+    letter-spacing: 2px;
+  }
+
+  .form input {
+    height: 40px;
+    width: 350px;
+
+  }
+
+  #card-element {
+    height: 50px;
+  }
+
+  #payment-form button {
+    letter-spacing: 2px;
+    height: 50px;
+    width: 150px;
+  }
+  .form {
+    display: flex;
+    flex-direction: column;
+  }

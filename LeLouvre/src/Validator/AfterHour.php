@@ -13,5 +13,5 @@ class AfterHour extends Constraint
      * Any public properties become valid options for the annotation.
      * Then, use these in your validator class.
      */
-    public $message = 'Les billets journée pour ce jour ci sont indisponibles après 14h00.';
+    public $message = 'Après 14h00, seul le billet demi-journée est disponible.';
 }

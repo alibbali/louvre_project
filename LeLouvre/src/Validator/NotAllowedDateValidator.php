@@ -32,7 +32,6 @@ class NotAllowedDateValidator extends ConstraintValidator
         //Je formate de façon à récuperer les éléments voulus
         $formatedDate = date('m/d', strtotime($date));
         $daysOfFormattedDate = date('N', strtotime($date));
-        $formatedTime = date('H:i', strtotime($date));
         
         /* echo '<pre>';
         var_dump($date, $today, $formatedDate, $daysOfFormattedDate, $formatedTime);
@@ -50,12 +49,18 @@ class NotAllowedDateValidator extends ConstraintValidator
                     return $message;
         }
         //Si c'est un mardi
-        elseif($daysOfFormattedDate == 2 ){
-            $message = $this->context->buildViolation("Le musée est fermé le mardi, impossible de commander.")
+        elseif($daysOfFormattedDate == 2 ) {
+            $message = $this->context->buildViolation("Le musée est fermé le mardi, merci de selectionner une autre date.")
                            ->atPath('dateVisite')
                            ->addViolation();
              return $message;
          }
+        elseif ($daysOfFormattedDate == 7) {
+            $message = $this->context->buildViolation("Le musée est fermé le dimanche, merci de selectionner une autre date.")
+                            ->atPath('dateVisite')
+                            ->addViolation();
+            return $message;
+        }
         /*     foreach ($notAllowedDate as $key) {
                 $formatedList = date('d/m', strtotime($key));
                 //Si la date choisi est un jour férié :
